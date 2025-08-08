@@ -1,0 +1,90 @@
+.navbar{
+    position: fixed;
+    top: 0px;
+    background-color:rgb(243, 243, 243);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   
+}
+.LogoName{
+    color:var(--theme-color);
+    font-weight: 500;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+      position: fixed;
+      transform: translateX(40px);
+
+}
+/* @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+.ThemeChanger{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  background: conic-gradient(
+    red,
+    yellow,
+    rgb(0, 255, 0),
+    rgb(176, 0, 176),
+    red
+  );
+
+    display: flex;
+  
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 100px;
+
+}
+.theme-popup {
+  top: 70px;
+  right: 20px;
+    margin-top: 290px;
+  padding: 10px;
+  border-radius: 10px;
+ background-color:rgb(243, 243, 243);
+ z-index: 999;
+}
+.DropDownContent{
+    display: none;
+}
+@media (max-width:1000px) {
+    .navbar{
+        
+        justify-content: space-between;
+        
+        
+    }
+
+    .ThemeChanger{
+        
+        
+        margin-right: 30px;
+        
+    }
+    .theme-popup {
+        position: absolute;
+        top: 45px;
+        right: 20px;
+
+        background-color:rgb(243, 243, 243);
+        padding: 10px;
+        border-radius: 10px;
+        z-index: 999;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width:450px) {
+    
+}

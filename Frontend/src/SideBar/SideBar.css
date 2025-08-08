@@ -1,0 +1,83 @@
+.SideContainer {
+  background-color: var(--theme-color);
+  width: 0;
+  height: 100vh;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding-top: 20px;
+  color: white
+}
+
+
+.nav-item {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease, opacity 1s ease, transform 1s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nav-item a {
+  overflow: hidden;
+  white-space: nowrap;
+  color:white;/* ✅ changed from black to white */
+  border: 1px solid rgb(255, 255, 255);
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  padding: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  text-decoration: none;
+  transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.nav-item a:hover{
+  color:var(--theme-color);
+  background-color: white;
+}
+
+/* When sidebar is open, animate nav items */
+.SideContainer.open .nav-item a{
+  opacity: 1;
+  transform: translateX(0);
+}
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.SideContainer .Ok {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.SideContainerMobileSize{
+  display: none;
+  position: absolute;
+  background-color: var(--theme-color);
+  height: 100%;
+}
+
+@media(max-width:1000px) {
+  .SideContainer {
+    display: none;
+  }
+
+  .SideContainerMobileSize{
+    display: block;
+  }
+}

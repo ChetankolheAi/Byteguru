@@ -1,0 +1,31 @@
+:root {
+  --theme-color: rgb(137, 0, 96); /* Default orange */
+}
+
+body {
+  margin: 0;
+  transition: background-color 0.3s ease;
+}
+
+.SideContainer {
+  background-color: var(--theme-color);
+}
+.input-section button {
+ 
+  background-color: var(--theme-color);
+
+}
+.bars {
+ 
+  color: black;
+
+}
+.chat-message.user {
+  margin-left: auto;
+  font-weight: 400;
+   background-color: var(--theme-color-light, rgba(0, 0, 0, 0.05));
+  color: var(--theme-color);
+}
+/* .navbar{
+    background-color:  var(--theme-color);
+} */
