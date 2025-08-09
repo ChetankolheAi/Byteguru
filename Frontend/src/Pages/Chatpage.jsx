@@ -3,6 +3,7 @@ import './Chatpage.css';
 
 function Chatpage() {
   const [userInput, setUserInput] = useState('');
+  const [loading, setLoading] = useState(false); // Track if Gemini is responding
   const [chatHistory, setChatHistory] = useState([]);
 
   const handleChange = (e) => {
@@ -11,10 +12,10 @@ function Chatpage() {
 
   const handleGeminiCall = async () => {
     if (!userInput.trim()) return;
-
+    setLoading(true);
     const userMessage = { sender: 'user', text: userInput };
     setChatHistory((prev) => [...prev, userMessage]);
-
+    //https://xrayai-kzo5.onrender.com
     try {
       const res = await fetch('http://localhost:5000/api/gemini', {
         method: 'POST',
@@ -27,6 +28,9 @@ function Chatpage() {
         sender: 'bot',
         text: data.response || "Sorry, I couldn't understand that.",
       };
+      if(botMessage){
+        setLoading(false);
+      }
 
       setChatHistory((prev) => [...prev, botMessage]);
     } catch {
@@ -38,33 +42,47 @@ function Chatpage() {
 
     setUserInput('');
   };
+  
 
   return (
     <>
     <div className="Container">
       <div className="chat-container">
-      <h1 className="chat-title">XRayAI Chatbot</h1>
+      {/* <h1 className="chat-title">XRayAI Chatbot</h1> */}
 
-      <div className="chat-box">
-        {chatHistory.map((msg, index) => (
+    <div className="chat-box">
+      {chatHistory && chatHistory.length > 0 ? (
+        chatHistory.map((msg, index) => (
           <div
             key={index}
             className={`chat-message ${msg.sender === 'user' ? 'user' : 'bot'}`}
           >
             <span>{msg.text}</span>
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <div className="GreetingMssg">
+          <span>Good Afternoon </span>
+          <p>How can I help you today?</p>
+        </div>
+      )}
+    </div>
+
 
       <div className="input-section">
         <input
           type="text"
           value={userInput}
           onChange={handleChange}
-          onKeyDown={(e) => e.key === 'Enter' && handleGeminiCall()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !loading) {
+              handleGeminiCall()
+            }
+          }}
+
           placeholder="Ask something..."
         />
-        <button onClick={handleGeminiCall}>Send</button>
+        <button onClick={handleGeminiCall} disabled={loading}>  {loading ? "Thinking..." : "Send"}</button>
       </div>
     </div>
 

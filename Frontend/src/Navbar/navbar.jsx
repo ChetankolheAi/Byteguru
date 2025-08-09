@@ -36,7 +36,7 @@ function Navbar({ isOpen, toggleSidebar }) {
 
       {showThemeChanger && (
         <div className="theme-popup">
-          <ThemeChanger />
+          <ThemeChanger  closePanel={() => setShowThemeChanger(false)} />
         </div>
       )}
     </div>

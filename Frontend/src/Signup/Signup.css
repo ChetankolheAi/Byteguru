@@ -1,0 +1,121 @@
+.SignupContainer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 90vh;
+    align-items: center;
+}
+.SignupCard {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 10px;
+}
+.Input {
+    display: flex;
+    width: 100%;
+    border: none;
+    flex-direction: column;
+}
+.alreadyUser {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 3px;
+    align-items: center;
+    width: 100%;
+}
+.alreadyUser a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: blue;
+}
+.alreadyUser a:hover {
+    color: black;
+}
+.SignupCard h1 {
+     font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+    font-size: 35px;
+}
+.SignupCard label {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+.SignupCard input {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 15px;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 3px;
+}
+.SignupCard button {
+    width: 100%;
+    font-weight: 700;
+    height: 40px;
+    color: white;
+    background-color: var(--theme-color);
+    margin-top: 30px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+.SignupCard button:hover {
+    transform: translateY(-3px);
+    transition: 0.3s ease-in-out;
+}
+.alreadyUser{
+    margin-top: 10px;
+}
+
+@media (max-width: 700px) {
+    .SignupCard {
+        width: 400px;
+    }
+}
+@media (max-width: 500px) {
+    .SignupCard {
+        width: 300px;
+    }
+    .SignupCard input {
+        padding: 12px;
+        font-size: 13px;
+    }
+    .SignupCard label {
+        margin-top: 15px;
+        font-size: 17px;
+    }
+    .SignupCard h1 {
+        font-size: 25px;
+    }
+}
+@media (max-width: 400px) {
+    .SignupCard {
+        padding: 30px;
+        width: 270px;
+    }
+    .SignupCard input {
+        padding: 12px;
+        font-size: 13px;
+    }
+    .SignupCard label {
+        margin-top: 15px;
+        font-size: 17px;
+    }
+    .SignupCard h1 {
+        font-size: 25px;
+    }
+}

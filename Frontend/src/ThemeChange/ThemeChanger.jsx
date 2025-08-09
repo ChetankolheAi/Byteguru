@@ -1,6 +1,6 @@
 import React from 'react';
 import './ThemeChanger.css';
-
+import Navbar from '../Navbar/navbar';
 const colorOptions = [
   '#f08800ff', '#FF5722', '#F44336', // Orange & Red shades
   '#4CAF50', '#388E3C', '#00796B', // Green & Teal shades
@@ -10,10 +10,10 @@ const colorOptions = [
 ];
 
 
-function ThemeChanger() {
+function ThemeChanger({closePanel}) {
   const handleColorSelect = (color) => {
     document.documentElement.style.setProperty('--theme-color', color);
-    
+      closePanel(); 
   };
 
   return (

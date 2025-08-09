@@ -5,6 +5,10 @@
 body {
   margin: 0;
   transition: background-color 0.3s ease;
+  background-color: rgb(232, 232, 232);
+}
+p {
+  margin: 0;
 }
 
 .SideContainer {
