@@ -10,7 +10,7 @@ import AboutUs from './AboutUs/AboutUs';
 import Navbar from './Navbar/navbar';
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-   
+
   return (
     <Router>
       <SideBar isOpen={isSidebarOpen} 

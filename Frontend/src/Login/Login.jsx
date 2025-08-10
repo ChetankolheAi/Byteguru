@@ -1,15 +1,67 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-
+import { API_URL, notify } from '../utils';
 function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+   
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+    });
 
-    const handleLogin = () => {
-        console.log('Logging in with:', username, password);
-        // Add login logic here
-    };
+      const navigate = useNavigate(); // For navigation after login
+
+  const  handleSubmit = async (e)=> {
+     e.preventDefault()// Prevent page reload
+    
+    
+    try{
+      const url =`${API_URL}/api/login`;
+      const response = await fetch(url, {
+    
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user),
+    })
+    const result = await response.json();
+    console.log(result.message)
+
+    const {message ,jwtToken,username,email,_id}= result;
+    
+
+    if(result.success == true){
+
+        console.log(message)
+        
+        notify(message ,'success');
+        
+        localStorage.setItem('token',jwtToken);
+        localStorage.setItem("userId", _id);
+        localStorage.setItem("email", email);
+        localStorage.setItem('loggedInUser',username);
+        window.dispatchEvent(new Event('storage'));
+        console.log("Token set in localStorage:", localStorage.getItem('token'));
+        
+        console.log("Navigating to Home Page");
+          
+        alert("Navigating to Home Page")
+        setTimeout(() => navigate('/'), 500);
+
+    }else if(result.success == false){
+      
+      notify(message ,'error');
+      console.log("Someting Went Wrong ! Try Again")
+
+    }
+  } catch (error) {
+       console.error(error);
+       notify("Something Went Wrong ! Try Again Later !" ,'info');
+      
+  }
+
+}
 
     return (
         <div className="login-container">
@@ -17,26 +69,25 @@ function Login() {
                 <h1 className="login-title">Login</h1>
 
                 <div className="login-input-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Email</label>
                     <input
-                        type="text"
+                        type="email"
                         id="username"
-                        value={username}
-                        placeholder="Enter your username"
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+                        value={user.email}
+                        placeholder="Enter your Email"
+                        onChange={(e) => setUser({ ...user, email: e.target.value })}                    />
 
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
-                        value={password}
+                        value={user.password}
                         placeholder="Enter your password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })}
                     />
                 </div>
 
-                <button onClick={handleLogin} className="login-button">
+                <button onClick={handleSubmit} className="login-button">
                     Login
                 </button>
 

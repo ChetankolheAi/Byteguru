@@ -7,7 +7,25 @@ body {
   transition: background-color 0.3s ease;
   background-color: rgb(232, 232, 232);
 }
+#btn{
+  padding: 8px 15px;
+  font-weight: 700;
+  border-radius: 5px;
+  border: none;
+  color: var(--theme-color);
+  background-color: white;
+  transition: 0.2s ease ;
+}
+#btn:hover{
+  transform: translateY(-3px);
+  transition: 0.2s ease ;
+  background-color: rgb(224, 224, 224);
+  color: var(--theme-color);
+}
 p {
+  margin: 0;
+}
+h2{
   margin: 0;
 }
 

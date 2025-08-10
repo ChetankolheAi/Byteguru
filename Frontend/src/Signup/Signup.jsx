@@ -1,13 +1,62 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
-
+import { API_URL, notify } from '../utils';
 function Signup() {
-    const [username, setUsername] = useState("");
+      const [user, setUser] = useState({
+    email: '',
+    password: '',
+    confirmpassword: ''
+  });
 
-    const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    console.log(username, password);
+  const handleClick = async () => {
+    if (user.password !== user.confirmpassword) {
+      notify("Confirm Password Don't Match" ,'success');
+      return;
+    }
+
+    if (user.password.length < 8) {
+      notify("Password To Small" ,'warning');
+      return;
+    }
+
+    // Prepare user data without confirmpassword
+    const userData = {
+      email: user.email,
+      password: user.password
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/api/signup`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const result = await response.json();
+    
+      
+ 
+      if (result.success == true) {
+          notify(result.message , 'success')
+          alert("Navigating to Login Page")
+          setTimeout(() => navigate('/login'), 800);
+        
+      }
+      else if(result.success == false){
+
+        notify(result.message,'error')
+
+      }
+    } catch (error) {
+        console.log(error)
+       notify("Something Went Wrong ! Try Again Later !" ,'info');
+    }
+  }
 
     return (
         <div className="SignupContainer">
@@ -15,34 +64,34 @@ function Signup() {
                 <h1>Signup</h1> 
 
                 <div className="Input"> 
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="email1">Email</label>
                     <input
                         type="text"
-                        id="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={(e) => setUsername(e.target.value)}
+                        id="email1"
+                        value={user.email}
+                        placeholder="Email"
+                        onChange={(e) => setUser({ ...user, email: e.target.value })}
                     />
 
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
-                        value={password}
+                        value={user.password}
                         placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })}
                     />
-                    <label htmlFor="password">Confirm Password</label>
+                    <label htmlFor="Confirmpassword">Confirm Password</label>
                     <input
                         type="password"
-                        id="password"
-                        value={password}
+                        id="Confirmpassword"
+                        value={user.confirmpassword}
                         placeholder="Confirm Password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setUser({ ...user, confirmpassword: e.target.value })}
                     />
                 </div>
 
-                <button>Signup</button>
+                <button onClick={handleClick}>Signup</button>
 
                 <div className="alreadyUser">
                     <p>Already have an account?</p>

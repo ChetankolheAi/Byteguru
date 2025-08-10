@@ -17,7 +17,7 @@ function Chatpage() {
     setChatHistory((prev) => [...prev, userMessage]);
     //https://xrayai-kzo5.onrender.com
     try {
-      const res = await fetch('http://localhost:5000/api/gemini', {
+      const res = await fetch('https://xrayai-kzo5.onrender.com/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
@@ -28,10 +28,8 @@ function Chatpage() {
         sender: 'bot',
         text: data.response || "Sorry, I couldn't understand that.",
       };
-      if(botMessage){
-        setLoading(false);
-      }
-
+      
+      
       setChatHistory((prev) => [...prev, botMessage]);
     } catch {
       setChatHistory((prev) => [
@@ -39,7 +37,8 @@ function Chatpage() {
         { sender: 'bot', text: 'Error connecting to Gemini API' },
       ]);
     }
-
+    
+    setLoading(false);
     setUserInput('');
   };
   
@@ -82,7 +81,7 @@ function Chatpage() {
 
           placeholder="Ask something..."
         />
-        <button onClick={handleGeminiCall} disabled={loading}>  {loading ? "Thinking..." : "Send"}</button>
+        <button onClick={handleGeminiCall} disabled={loading}> Send</button>
       </div>
     </div>
 
