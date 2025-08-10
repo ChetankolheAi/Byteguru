@@ -1,7 +1,7 @@
 .SideContainer {
   background-color: var(--theme-color);
   width: 0;
-  height: 100vh;
+  height: 80vh;
   overflow: hidden;
   transition: width 0.3s ease;
   position: fixed;
@@ -162,7 +162,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    
+
     
   }
   .con2MobileSize{

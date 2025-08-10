@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import './Chatpage.css';
-
+import {CHATBOT_BACKEND_URL,API_URL} from '../utils.js'
 function Chatpage() {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false); // Track if Gemini is responding
   const [chatHistory, setChatHistory] = useState([]);
-
   const handleChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -15,9 +14,9 @@ function Chatpage() {
     setLoading(true);
     const userMessage = { sender: 'user', text: userInput };
     setChatHistory((prev) => [...prev, userMessage]);
-    //https://xrayai-kzo5.onrender.com
+    
     try {
-      const res = await fetch('https://xrayai-kzo5.onrender.com/api/gemini', {
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),

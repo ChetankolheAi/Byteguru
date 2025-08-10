@@ -16,5 +16,6 @@ export const notify = (message, type = "info") => {
     });
 };
 
+export const CHATBOT_BACKEND_URL = import.meta.env.CHATBOT_BACKEND_URL;
 
 export const API_URL = import.meta.env.VITE_API_URL;
