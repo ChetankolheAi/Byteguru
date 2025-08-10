@@ -16,7 +16,7 @@ function Chatpage() {
     setChatHistory((prev) => [...prev, userMessage]);
     
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(`${API_URL}/api/gemini`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
