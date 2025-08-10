@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
-import { API_URL, notify } from '../utils';
+import { BACKEND_URL,API_URL, notify } from '../utils';
 function Signup() {
       const [user, setUser] = useState({
     email: '',

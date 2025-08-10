@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import { API_URL, notify } from '../utils';
+import { BACKEND_URL,API_URL, notify } from '../utils';
 function Login() {
    
     const [user, setUser] = useState({
@@ -16,7 +16,7 @@ function Login() {
     
     
     try{
-      const url =`${API_URL}/api/login`;
+      const url =`${BACKEND_URL}/api/login`;
       const response = await fetch(url, {
     
       method: 'POST',

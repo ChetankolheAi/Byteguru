@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Chatpage.css';
-import {CHATBOT_BACKEND_URL,API_URL} from '../utils.js'
+import {BACKEND_URL,API_URL} from '../utils.js'
 function Chatpage() {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false); // Track if Gemini is responding
@@ -16,7 +16,7 @@ function Chatpage() {
     setChatHistory((prev) => [...prev, userMessage]);
     
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userInput }),
