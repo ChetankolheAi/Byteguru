@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import { BACKEND_URL,API_URL, notify } from '../utils';
+import { API_URL, notify } from '../utils';
 function Login() {
    
     const [user, setUser] = useState({
@@ -16,7 +16,7 @@ function Login() {
     
     
     try{
-      const url =`${BACKEND_URL}/api/login`;
+      const url =`${API_URL}/api/login`;
       const response = await fetch(url, {
     
       method: 'POST',
@@ -28,19 +28,17 @@ function Login() {
     const result = await response.json();
     console.log(result.message)
 
-    const {message ,jwtToken,username,email,_id}= result;
+    const {message ,jwtToken,firstname,email,_id}= result;
     
-
+ 
     if(result.success == true){
-
-        console.log(message)
         
         notify(message ,'success');
         
         localStorage.setItem('token',jwtToken);
         localStorage.setItem("userId", _id);
         localStorage.setItem("email", email);
-        localStorage.setItem('loggedInUser',username);
+        localStorage.setItem('firstname',firstname);
         window.dispatchEvent(new Event('storage'));
         console.log("Token set in localStorage:", localStorage.getItem('token'));
         

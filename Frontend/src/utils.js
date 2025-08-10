@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const notify = (message, type = "info") => {
     toast[type](message, {
         position: "top-right", 
-        autoClose: 2000,        
+        autoClose: 9000,        
         hideProgressBar: false, 
         closeOnClick: false,   
         pauseOnHover: true,
@@ -16,6 +16,5 @@ export const notify = (message, type = "info") => {
     });
 };
 
-export const BACKEND_URL = import.meta.env.BACKEND_URL;
 
 export const API_URL = import.meta.env.VITE_API_URL;

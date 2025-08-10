@@ -52,3 +52,43 @@ h2{
 /* .navbar{
     background-color:  var(--theme-color);
 } */
+.Toastify__toast-container {
+  margin-top: 30px;
+}
+
+
+.toast-success {
+    background-color:white !important;
+    color: var(--theme-color) !important;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 100px;
+}
+
+
+.toast-error {
+    background-color:white !important;
+    color: var(--theme-color) !important;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+
+.toast-warning {
+    background-color: white !important; 
+    color: var(--theme-color)!important;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 12px;
+}
+.toast-info {
+    background-color: white !important; 
+    color: var(--theme-color)!important;
+    font-weight: bold;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    
+}

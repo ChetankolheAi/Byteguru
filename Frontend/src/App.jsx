@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer , Slide} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './Pages/Chatpage';
 import SideBar from './SideBar/SideBar';
@@ -26,8 +28,11 @@ function App() {
 
       >
         <Navbar isOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}/>
+          <ToastContainer transition={Slide} /> 
+      
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/History" element={<History />} />
           <Route path="/Aboutus" element={<AboutUs />} />
           <Route path="/Login" element={<Login />} />

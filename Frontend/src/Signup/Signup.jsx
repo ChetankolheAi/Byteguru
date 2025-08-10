@@ -1,62 +1,64 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
-import { BACKEND_URL,API_URL, notify } from '../utils';
+import { API_URL, notify } from '../utils';
 function Signup() {
       const [user, setUser] = useState({
-    email: '',
-    password: '',
-    confirmpassword: ''
-  });
-
-  const navigate = useNavigate();
-
-  const handleClick = async () => {
-    if (user.password !== user.confirmpassword) {
-      notify("Confirm Password Don't Match" ,'success');
-      return;
-    }
-
-    if (user.password.length < 8) {
-      notify("Password To Small" ,'warning');
-      return;
-    }
-
-    // Prepare user data without confirmpassword
-    const userData = {
-      email: user.email,
-      password: user.password
-    };
-
-    try {
-      const response = await fetch(`${API_URL}/api/signup`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData),
+        firstname:'',
+        email: '',
+        password: '',
+        confirmpassword: ''
       });
 
-      const result = await response.json();
-    
-      
- 
-      if (result.success == true) {
-          notify(result.message , 'success')
-          alert("Navigating to Login Page")
-          setTimeout(() => navigate('/login'), 800);
+      const navigate = useNavigate();
+
+      const handleClick = async () => {
+        if (user.password !== user.confirmpassword) {
+          notify("Confirm Password Don't Match" ,'success');
+          return;
+        }
+
+        if (user.password.length < 8) {
+          notify("Password To Small" ,'warning');
+          return;
+        }
+
+        // Prepare user data without confirmpassword
+        const userData = {
+          firstname:user.firstname,
+          email: user.email,
+          password: user.password
+        };
+
+        try {
+          const response = await fetch(`${API_URL}/api/signup`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData),
+          });
+
+          const result = await response.json();
         
-      }
-      else if(result.success == false){
+          
+    
+          if (result.success == true) {
+              notify(result.message , 'success')
+              alert("Navigating to Login Page")
+              setTimeout(() => navigate('/login'), 800);
+            
+          }
+          else if(result.success == false){
 
-        notify(result.message,'error')
+            notify(result.message,'error')
 
+          }
+        } catch (error) {
+            console.log(error)
+          notify("Something Went Wrong ! Try Again Later !" ,'info');
+        }
       }
-    } catch (error) {
-        console.log(error)
-       notify("Something Went Wrong ! Try Again Later !" ,'info');
-    }
-  }
 
     return (
         <div className="SignupContainer">
@@ -64,6 +66,14 @@ function Signup() {
                 <h1>Signup</h1> 
 
                 <div className="Input"> 
+                    <label htmlFor="firstname">FirstName</label>
+                    <input
+                        type="text"
+                        id="firstname"
+                        value={user.firstname}
+                        placeholder="FirstName"
+                        onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+                    />
                     <label htmlFor="email1">Email</label>
                     <input
                         type="text"

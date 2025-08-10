@@ -15,7 +15,6 @@ const GEMINI_API_KEY = process.env.GEMINI_APIKEY || "AIzaSyBnylxuE6kPQQi3OpBgsT4
 
 app.post("/api/gemini", async (req, res) => {
   const { prompt } = req.body;
-  console.log(prompt);
 
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });

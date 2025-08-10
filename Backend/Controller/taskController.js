@@ -13,12 +13,10 @@ const signup = async (req,res)=>{
             return res.status(400).json({ success: false,message: "User already exists. Please login." });
         }
         
-        console.log(req.body);
-       
-
+    
         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
         const newUser = new Login_details({
-            username: req.body.username,
+            firstname: req.body.firstname,
             email: req.body.email,
             password: hashedPassword
         });
@@ -36,16 +34,12 @@ const Login = async (req, res) => {
             return res.status(403).json({ message: "Invalid email ", success: false });
         }
 
-        console.log(typeof(user.password));
-        console.log(typeof(req.body.password));
+       
         const isPassEqual = await bcrypt.compare(req.body.password, user.password);
         if (!isPassEqual) {
             console.log("passwrong")
             return res.status(403).json({ message: "Invalid password", success: false });
         }
-
- 
-        console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
         const jwtToken = jwt.sign(
             { email: user.email, _id: user._id },
@@ -53,16 +47,17 @@ const Login = async (req, res) => {
             { expiresIn: '24h' }
         );
 
-      
+    
         res.status(200).json({
             message: "Login Success",
             success: true,
             jwtToken:jwtToken,
+            firstname: user.firstname,
             email: user.email,
             _id:user._id,
-            username: user.username
         });
     } catch (err) {
+
         console.error("Error during login:", err); 
         res.status(500).json({
             message: "Internal server error",

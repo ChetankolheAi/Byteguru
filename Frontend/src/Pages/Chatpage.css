@@ -1,5 +1,5 @@
 .Container{
-    height: 90vh;
+    height: 80vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,12 +12,11 @@
 .chat-container {
 
   margin:  auto;
-  padding: 20px;
   border-radius: 15px;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;   
-  height: 80vh;
+  height: 90vh;
 
   
 }
@@ -168,7 +167,7 @@
 
   
   height: 80vh;
-
+    
   
 }
   .chat-box {
