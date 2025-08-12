@@ -1,3 +1,37 @@
 .History{
     margin-top: 50px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.History h1{
+    margin: 0;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.message.user{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    width: auto;
+}
+.chat-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chat-container.history{
+    height: 80vh;
+
+}
+.DateContainer h2{
+    background-color: var(--theme-color);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
 }

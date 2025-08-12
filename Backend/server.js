@@ -3,6 +3,7 @@ import cors from "cors";
 import axios from "axios";
 import Login from './Routes/index.js';
 import './Model/db.js'; 
+import jwt from "jsonwebtoken";
 
 const app = express();
 const PORT = 5000;
@@ -10,11 +11,28 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const GEMINI_API_KEY = process.env.GEMINI_APIKEY || "AIzaSyBnylxuE6kPQQi3OpBgsT4S9Lgp1S2vPsU";
+const GEMINI_API_KEY = process.env.GEMINI_APIKEY;
+
+
+// function verifyToken(req, res, next) {
+//   const token = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
+//   if (!token) {
+//     return res.status(401).json({ error: "No token provided" });
+//   }
+
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = decoded; 
+//     next();
+//   } catch (err) {
+//     return res.status(403).json({ error: "Authentication Failed" });
+//   }
+// }
 
 
 app.post("/api/gemini", async (req, res) => {
   const { prompt } = req.body;
+  console.log(req.body);
 
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });
@@ -27,7 +45,7 @@ app.post("/api/gemini", async (req, res) => {
         contents: [
           {
             role: "user",
-            parts: [{ text: prompt }],
+            parts: [{ text: prompt}],
           },
         ],
       }
@@ -44,8 +62,11 @@ app.post("/api/gemini", async (req, res) => {
   }
 });
 
-app.use('/api', Login); 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
 
+app.use('/api', Login);
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
