@@ -28,7 +28,9 @@ const signup = async (req,res)=>{
         try {
             const user = await Login_details.findOne({ email: req.body.email });
             
-            
+            console.log("Login API hit");
+            console.log("Request body:", req.body);
+
             if (!user) {
                 console.log("userWrong")
                 return res.status(403).json({ message: "Invalid email ", success: false });
@@ -39,10 +41,9 @@ const signup = async (req,res)=>{
             if (!isPassEqual) {
                 console.log("passwrong")
                 return res.status(403).json({ message: "Invalid password", success: false });
-        }
-        
+        }    
         const jwtToken = jwt.sign(
-            { email: user.email, _id: user._id },
+            { email: user.email, _id: user._id ,firstname:user.firstname},
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
         );
@@ -52,9 +53,6 @@ const signup = async (req,res)=>{
             message: "Login Success",
             success: true,
             jwtToken:jwtToken,
-            firstname: user.firstname,
-            email: user.email,
-            _id:user._id,
         });
     } catch (err) {
         
@@ -73,12 +71,7 @@ const signup = async (req,res)=>{
             if(userHistory){
 
                 const isDatePresent  = userHistory.history.find(h => h.date === date);
-                // console.log("9999999999999999")
-                // console.log(req.body.history)
-                // console.log("0000000000000000000000000000000000")
-                // console.log(isDatePresent)
-                // console.log("111111111111111")
-                // console.log(isDatePresent.Datehistory);
+                
                 if(isDatePresent && isDatePresent.date==date){
                     isDatePresent.Datehistory.push(...req.body.history);
                     userHistory.markModified('history'); // Tell Mongoose nested field changed
@@ -135,7 +128,25 @@ const signup = async (req,res)=>{
   }
 };
 
+const verify = (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  console.log("Hitted")
+  console.log(token)
+  if (!token) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  try {
+    console.log("ok")
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    return res.status(200).json({ success: true, user: decoded });
+  } catch (err) {
+    return res.status(403).json({ error: "Authentication Failed" });
+  }
+};
 
 
 
-export {signup , Login , SaveHistory,GetHistory }
+
+export {signup , Login , SaveHistory,GetHistory ,verify}

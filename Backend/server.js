@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import axios from "axios";
-import Login from './Routes/index.js';
+import taskRoutes  from './Routes/index.js';
 import './Model/db.js'; 
 import jwt from "jsonwebtoken";
 
@@ -63,7 +63,7 @@ app.post("/api/gemini", async (req, res) => {
 });
 
 
-app.use('/api', Login);
+app.use('/api', taskRoutes);
 
 
 

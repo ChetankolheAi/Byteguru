@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { API_URL } from '../utils';
 import './History.css';
 
-function History() {
-  const [userId] = useState(localStorage.getItem('userId') || '');
+
+function History({ userid }) {
+  
   const [history, setChatHistory] = useState([]);
   const today = new Date();
   const formattedDate = `${today.getDate()+1}/${today.getMonth() + 1}/${today.getFullYear()}`;
   console.log(formattedDate);
 
+  
 useEffect(() => {
+    if (!userid) return;
   const fetchHistory = async () => {
     try {
       const res = await fetch(`${API_URL}/api/getHistory`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userid: userId , Date:formattedDate }),
+        body: JSON.stringify({ userid: userid , Date:formattedDate }),
       });
 
       if (!res.ok) throw new Error("Failed to fetch history");
@@ -31,10 +34,11 @@ useEffect(() => {
   };
 
   fetchHistory();
-}, [userId ,formattedDate]);
+}, [userid ,formattedDate]);
 
 return (
   <div className="History">
+
     <div className="chat-container history">
       <div className="chat-box">
         {history && history.length > 0 ? (

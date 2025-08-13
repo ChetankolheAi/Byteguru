@@ -3,11 +3,12 @@ import './Chatpage.css';
 import { marked } from 'marked';
 import { API_URL, notify } from '../utils.js';
 
-function Chatpage() {
+function Chatpage({userid}) {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
-  const [userId] = useState(localStorage.getItem('userId') || '');
+
+  console.log(userid)
   const today = new Date();
   const formattedDate = `${today.getDate()+1}/${today.getMonth() + 1}/${today.getFullYear()}`;
   console.log(formattedDate);
@@ -45,23 +46,25 @@ function Chatpage() {
     const html = marked.parse(markdown);
 
     // 2️⃣ Save chat history in backend
-    try {
-      const HistoryData = {
-        userid: userId,
-        history: [...chatHistory, userMessage, { sender: 'bot', text: html }],
-        date:formattedDate
-      };
-
-      const historyRes = await fetch(`${API_URL}/api/History`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(HistoryData),
-      });
-
-      const historyResult = await historyRes.json();
-      console.log('History save result:', historyResult);
-    } catch (err) {
-      console.error('Error saving history:', err);
+    if(userid){
+      try {
+        const HistoryData = {
+          userid: userid,
+          history: [...chatHistory, userMessage, { sender: 'bot', text: html }],
+          date:formattedDate
+        };
+  
+        const historyRes = await fetch(`${API_URL}/api/History`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(HistoryData),
+        });
+  
+        const historyResult = await historyRes.json();
+        console.log('History save result:', historyResult);
+      } catch (err) {
+        console.error('Error saving history:', err);
+      }
     }
 
     // 3️⃣ Add bot message to UI

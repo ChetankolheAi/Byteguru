@@ -28,7 +28,7 @@ function Login() {
     const result = await response.json();
     console.log(result.message)
 
-    const {message ,jwtToken,firstname,email,_id}= result;
+    const {message ,jwtToken}= result;
     
  
     if(result.success == true){
@@ -36,12 +36,8 @@ function Login() {
         notify(message ,'success');
         
         localStorage.setItem('token',jwtToken);
-        localStorage.setItem("userId", _id);
-        localStorage.setItem("email", email);
-        localStorage.setItem('firstname',firstname);
         window.dispatchEvent(new Event('storage'));
         console.log("Token set in localStorage:", localStorage.getItem('token'));
-        
         console.log("Navigating to Home Page");
           
         alert("Navigating to Home Page")

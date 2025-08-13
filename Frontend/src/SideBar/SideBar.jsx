@@ -7,36 +7,93 @@ function SideBar({ isOpen }) {
 
   const location = useLocation();
   const currentPath = location.pathname;
-    const [emailuser, setemailUser] = useState(localStorage.getItem('email') || '');
-    const [Firstname, setFirstName] = useState(localStorage.getItem('firstname') || '');
-    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+    const [emailuser , setUserEmail] = useState();
+    const [Firstname , setFirstname] = useState();
+    // const [token] = useState(localStorage.getItem('token') || '')
+    const [isAuthenticated, setIsAuthenticated] = useState();
     const navigate = useNavigate();
 
+useEffect(() => {
+  const updateAuthStatus = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setIsAuthenticated(false);
+        return;
+      }
 
-    useEffect(() => {
-    const updateAuthStatus = () => {
-      setemailUser(localStorage.getItem('email') || '');
-      setFirstName(localStorage.getItem('firstname') || '');
-      setIsAuthenticated(!!localStorage.getItem('token'));
-    };
+      const response = await fetch(`${API_URL}/api/verify`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
 
-    window.addEventListener('storage', updateAuthStatus);
+      if (!response.ok) {
+        let errorMessage = "Authentication failed";
+        try {
+          const errData = await response.json();
+          if (errData?.message) {
+            errorMessage = errData.message;
+          }
+        } catch (parseError) {
+          console.warn("Could not parse error JSON:", parseError);
+        }
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        notify(errorMessage, "error");
+        return;
+      }
 
-    return () => {
-      window.removeEventListener('storage', updateAuthStatus);
-    };
-  }, []);
+      let data;
+      try {
+        data = await response.json();
+        if (data?.user) {
+          setUserEmail(data.user.email);
+          setFirstname(data.user.firstname);
+        }
+      } catch (parseError) {
+        console.warn("Could not parse success JSON:", parseError);
+        setIsAuthenticated(false);
+        notify("Invalid server response", "error");
+        return;
+      }
+
+      if (data?.success) {
+        setIsAuthenticated(true);
+      } else {
+        notify(data?.message || "Token invalid", "error");
+      }
+
+    } catch (err) {
+      console.error("Verify error:", err);
+      localStorage.removeItem('token');
+      setIsAuthenticated(false);
+      notify("Unable to connect to server. Please try again later.", "error");
+    }
+  };
+
+  // ✅ Run immediately on page load/refresh
+  updateAuthStatus();
+
+  // ✅ Listen for token changes in other tabs
+  window.addEventListener('storage', updateAuthStatus);
+
+  return () => {
+    window.removeEventListener('storage', updateAuthStatus);
+  };
+}, []); // Empty dependency → runs only once per refresh
+
 
    const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
     if (confirmLogout) {
       localStorage.removeItem('token');
-      localStorage.removeItem('email');
-      localStorage.removeItem('firstname');
       window.dispatchEvent(new Event('storage'));
       notify("User Logged Out Successfully" ,'success');
- 
       navigate('/login');
+      window.location.reload(); 
     }
   };
 
