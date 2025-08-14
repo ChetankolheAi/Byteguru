@@ -10,7 +10,7 @@
    z-index: 999;
 }
 .LogoName{
-    color:var(--theme-color);
+    color:var(--theme-color-dark);
     font-weight: 500;
     align-items: center;
     display: flex;
@@ -23,10 +23,7 @@
       transform: translateX(40px);
 
 }
-/* @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-} */
+
 .ThemeChanger{
     height: 30px;
     width: 30px;

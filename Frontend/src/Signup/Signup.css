@@ -55,30 +55,44 @@
 .SignupCard input {
     border-radius: 5px;
     padding: 15px;
-    font-size: 15px;
+    font-size: 20px;
     font-family: "Josefin Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    margin-top: 3px;
+    margin-top: 20px;
+    border: none;
+    background-color: var(--theme-color-light);
+}
+input::placeholder {
+  color: rgb(60, 60, 60); /* Your desired color */
+  opacity: 1;  /* Ensures it's fully opaque */
 }
 .SignupCard button {
     width: 100%;
     font-weight: 700;
     height: 40px;
     color: white;
-    background-color: var(--theme-color);
+  background: linear-gradient(100deg,var(--theme-color) 40%, rgb(0, 0, 0));
+
     margin-top: 30px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: 0.3s ease-in-out;
 }
 .SignupCard button:hover {
     transform: translateY(-3px);
     transition: 0.3s ease-in-out;
+    background: linear-gradient(120deg ,  rgb(0, 0, 0),var(--theme-color)40% );
+    
+
 }
 .alreadyUser{
-    margin-top: 10px;
+    margin-top: 15px;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
 @media (max-width: 700px) {

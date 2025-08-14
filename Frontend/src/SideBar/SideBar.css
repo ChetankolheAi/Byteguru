@@ -1,5 +1,5 @@
 .SideContainer {
-  background-color: var(--theme-color);
+  background-color:  var(--theme-color-dark-1);
   width: 0;
   height: 100%;
   overflow: hidden;
@@ -26,16 +26,19 @@
   flex-direction: column;
   overflow: hidden;
   white-space: nowrap;
+  margin: 10px;
+  margin-left: 0px;
+
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: var(--theme-color-dark)
 }
 
 .nav-item a {
   overflow: hidden;
   white-space: nowrap;
-  color:white;/* ✅ changed from black to white */
-  border: 1px solid rgb(255, 255, 255);
-  border-top: none;
-  border-right: none;
-  border-left: none;
+  color: white;
   padding: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -79,7 +82,7 @@
 .SideContainerMobileSize{
   display: none;
   position: absolute;
-  background-color: var(--theme-color);
+  background-color:  var(--theme-color-dark-1);
   height: calc(100% - 50px);
  z-index: 1000;
 

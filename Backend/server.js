@@ -14,21 +14,6 @@ app.use(express.json());
 const GEMINI_API_KEY = process.env.GEMINI_APIKEY;
 
 
-// function verifyToken(req, res, next) {
-//   const token = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
-//   if (!token) {
-//     return res.status(401).json({ error: "No token provided" });
-//   }
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     req.user = decoded; 
-//     next();
-//   } catch (err) {
-//     return res.status(403).json({ error: "Authentication Failed" });
-//   }
-// }
-
 
 app.post("/api/gemini", async (req, res) => {
   const { prompt } = req.body;

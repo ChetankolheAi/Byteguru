@@ -66,7 +66,7 @@ function Signup() {
                 <h1>Signup</h1> 
 
                 <div className="Input"> 
-                    <label htmlFor="firstname">FirstName</label>
+                    {/* <label htmlFor="firstname">FirstName</label> */}
                     <input
                         type="text"
                         id="firstname"
@@ -74,7 +74,7 @@ function Signup() {
                         placeholder="FirstName"
                         onChange={(e) => setUser({ ...user, firstname: e.target.value })}
                     />
-                    <label htmlFor="email1">Email</label>
+                    {/* <label htmlFor="email1">Email</label> */}
                     <input
                         type="text"
                         id="email1"
@@ -83,7 +83,7 @@ function Signup() {
                         onChange={(e) => setUser({ ...user, email: e.target.value })}
                     />
 
-                    <label htmlFor="password">Password</label>
+                    {/* <label htmlFor="password">Password</label> */}
                     <input
                         type="password"
                         id="password"
@@ -91,7 +91,7 @@ function Signup() {
                         placeholder="Password"
                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                     />
-                    <label htmlFor="Confirmpassword">Confirm Password</label>
+                    {/* <label htmlFor="Confirmpassword">Confirm Password</label> */}
                     <input
                         type="password"
                         id="Confirmpassword"

@@ -84,12 +84,12 @@ function Login() {
                 <button onClick={handleSubmit} className="login-button">
                     Login
                 </button>
-
                 <div className="signup-section">
-                    <p>New User?</p>
+                    <p>New user?</p>
                     <Link to="/Signup"><i className="fa-solid fa-right-to-bracket"></i> Sign Up</Link>
                    
                 </div>
+
             </div>
         </div>
     );

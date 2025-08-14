@@ -23,6 +23,7 @@
   font-weight: 500;
   font-style: normal;
     font-size: 35px;
+    color: rgb(0, 0, 0);
 }
 
 .login-input-group {
@@ -36,6 +37,7 @@
     font-size: 20px;
     font-family: "Josefin Sans", sans-serif;
     font-weight: 500;
+
 }
 
 .login-input-group input {
@@ -44,7 +46,13 @@
     font-size: 15px;
     font-family: "Josefin Sans", sans-serif;
     font-weight: 500;
-    margin-top: 5px;
+ 
+    border: none;
+    background-color: var(--theme-color-light);
+}
+input::placeholder {
+  color: rgb(60, 60, 60); /* Your desired color */
+  opacity: 1;  /* Ensures it's fully opaque */
 }
 
 .login-button {
@@ -53,15 +61,17 @@
     margin-top: 30px;
     font-weight: 700;
     color: white;
-    background-color: var(--theme-color);
+    background: linear-gradient(90deg , var(--theme-color)40% , rgb(0, 0, 0));
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: 0.3s ease-in-out;
 }
 
 .login-button:hover {
     transform: translateY(-3px);
     transition: 0.3s ease-in-out;
+        background: linear-gradient(90deg , rgba(0, 0, 0, 0.849) , var(--theme-color)40%);
+
 }
 
 .signup-section {
@@ -78,7 +88,12 @@
     color: blue;
 }
 .signup-section {
-    margin-top: 10px;
+
+    margin-top: 15px;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 .signup-section a:hover {
     color: black;

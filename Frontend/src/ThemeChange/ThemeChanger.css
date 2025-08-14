@@ -1,54 +1,63 @@
 .theme-changer {
-  
-  font-family: Arial;
-  padding: 3px 20px 20px 20px;
-  border-radius: 10px ;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 15px 20px 20px 20px;
+  border-radius: 16px;
   width: 300px;
-     background-color:rgb(243, 243, 243);
-  
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  animation: fadeIn 0.3s ease;
 }
-.theme-changer h4{
-      color: rgb(172, 172, 172);
-    font-weight: bold;
-    cursor: pointer;
-      font-family: 'Segoe UI', sans-serif;
-    transition: background-color 0.3s ease;
+
+.theme-changer h4 {
+  color: #555;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
 }
 
 .color-options {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   margin-top: 10px;
 }
 
 .color-circle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.2s, border 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
 }
 
 .color-circle:hover {
-  transform: scale(1.1);
-  border-color: #333;
+  transform: scale(1.15);
 }
 
+.color-circle:active {
+  transform: scale(0.95);
+}
 
-
-@media (max-width:450px) {
+@media (max-width: 450px) {
   .theme-changer {
-    
-   
     width: 200px;
-   
-    
   }
-    .color-options {
-      
-      grid-template-columns: repeat(4,1fr);
-    
-    }
+  .color-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
