@@ -1,69 +1,61 @@
-.Container{
-    height: 80vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 50px;
-    max-height: 90vh;
-}
-.innerSection{
-    height: 80vh;
-}
-.chat-container {
+.Container {
 
-  margin:  auto;
+  height: calc(93vh - 50px); /* Adjust height to account for top margin */
+  margin-top: 50px;           /* Always keep 50px space from top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff00;
   border-radius: 15px;
   font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  flex-direction: column;   
-  height: 90vh;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  max-height: 90vh;
   padding: 10px;
-
-
-
-  
 }
 
-.chat-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 28px;
-  color: #333;
-}
 ::-webkit-scrollbar {
   display: none;
 }
+
 .chat-box {
+  flex: 1;
   overflow-y: auto;
   padding: 10px;
-
-
   border-radius: 10px;
   margin-bottom: 15px;
-  width: 800px;
-  height: 85vh;
+  width: 100%;
 }
 
 .chat-message {
   padding: 10px 15px;
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 10px;
   width: fit-content;
   max-width: 80%;
   word-wrap: break-word;
+  font-size: 16px;
 }
 
 .chat-message.user {
   margin-left: auto;
-  font-size: 17px;
   font-weight: 500;
+ 
 }
 
 .chat-message.bot {
   margin-right: auto;
   background-color: #f0f0f0;
   color: #333;
-    font-size: 17px;
   font-weight: 500;
 }
 
@@ -71,7 +63,7 @@
   display: flex;
   gap: 10px;
   background-color: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   width: 100%;
 }
@@ -89,6 +81,7 @@
   padding: 10px 20px;
   font-size: 16px;
   color: white;
+  background-color: var(--theme-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -98,93 +91,61 @@
 .input-section button:hover {
   background-color: #375ab3;
 }
-.GreetingMssg{
-   font-size: 40px;
-    font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
+
+.GreetingMssg {
+  font-size: 2rem;
+  font-family: "Outfit", sans-serif;
   font-weight: 500;
-  font-style: normal;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.GreetingMssg p { 
-  font-size: 45px;
+
+.GreetingMssg p {
+  font-size: 1.5rem;
   color: #606060;
 }
 
-@media(max-width:1150px){
+/* ===== Responsive Breakpoints ===== */
 
-
-  .chat-box {
-    width: 680px;
-   
-  }
-}
-  
-
-@media(max-width:850px){
-
-
-  .chat-box {
-    width: 580px;
-   
-  }
-}
-@media(max-width:700px){
-
-
-  .chat-box {
-    width: 480px
-  }
-  .GreetingMssg{
-   font-size: 35px;
-  
-}
-.GreetingMssg p { 
-  font-size: 40px;
-
-}
-} 
-  
-@media(max-width:600px){
-
-
-  .chat-box {
-    width: 400px
-  }
-   .GreetingMssg{
-   font-size: 30px;
-  
-}
-.GreetingMssg p { 
-  font-size: 30px;
-
-}
-} 
-  
-@media(max-width:450px){
-
+@media (max-width: 768px) {
   .chat-container {
+    max-width: 95%;
+    height: 95vh;
+  }
+  
+  .GreetingMssg {
+    font-size: 1.5rem;
+  }
 
-  
-  height: 80vh;
-    
-  
+  .GreetingMssg p {
+    font-size: 1.2rem;
+  }
 }
-  .chat-box {
-    width: 330px;
-  
-} 
-.GreetingMssg{
-   font-size: 30px;
-  
-}
-.GreetingMssg p { 
-  font-size: 25px;
 
-}
-  
+@media (max-width: 480px) {
+  .chat-container {
+    padding: 8px;
+  }
+
+  .input-section {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .input-section input {
+    font-size: 14px;
+  }
+
+  .input-section button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .chat-message {
+    font-size: 14px;
+  }
 }

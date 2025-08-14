@@ -1,3 +1,76 @@
-.Aboutus{
-    margin-top: 50px;
+.Aboutus {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  padding-top: 10px;
+  background: #ffffff;
+  min-height: 100vh;
+  margin-top: 50px;
+}
+
+.about {
+  max-width: 900px;
+ 
+  padding: 30px ;
+  padding-top: 0px;
+  border-radius: 12px;
+
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+.Heading h1 {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.descp p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  color: var(--theme-color);
+  margin-bottom: 10px;
+}
+
+.section p,
+.section ul {
+  color: #444;
+  font-size: 1rem;
+}
+
+.section ul {
+  padding-left: 20px;
+}
+
+.license {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.funfact {
+  background: #fff4e5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  border-left: 5px solid #ffa500;
+}
+@media (max-width:500px){
+    .Heading h1 {
+        font-size: 30px;
+    }
+    .Aboutus{
+        padding: 10px;
+    }
 }

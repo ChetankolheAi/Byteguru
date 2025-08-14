@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Chatpage.css';
 import { marked } from 'marked';
 import { API_URL, notify } from '../utils.js';
 
-function Chatpage({userid}) {
+function Chatpage({userid,firstname}) {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
+  const [greeting, setGreeting] = useState("");
 
   console.log(userid)
   const today = new Date();
@@ -15,7 +16,20 @@ function Chatpage({userid}) {
   const handleChange = (e) => {
     setUserInput(e.target.value);
   };
+    useEffect(() => {
+    const now = new Date();
+    const hours = now.getHours();
 
+    if (hours >= 5 && hours < 12) {
+      setGreeting("Good Morning");
+    } else if (hours >= 12 && hours < 17) {
+      setGreeting("Good Afternoon");
+    } else if (hours >= 17 && hours < 21) {
+      setGreeting("Good Evening");
+    } else {
+      setGreeting("Good Night");
+    }
+  }, []);
   const handleGeminiCall = async () => {
   if (!userInput.trim()) return;
 
@@ -105,7 +119,7 @@ function Chatpage({userid}) {
             ))
           ) : (
             <div className="GreetingMssg">
-              <span>Good Afternoon </span>
+              <span>{greeting} ! {userid?firstname:""} </span>
               <p>How can I help you today?</p>
             </div>
           )}

@@ -14,6 +14,7 @@ import { API_URL } from "./utils";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userid, setuserid] = useState("");
+  const [firstname, srtFirstname] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 useEffect(() => {
   const fetchUser = async () => {
@@ -43,6 +44,7 @@ useEffect(() => {
       const data = await res.json();
       if (data.success) {
         setuserid(data.user._id);
+        srtFirstname(data.user.firstname);
         setIsAuthenticated(true);
       }
     } catch (err) {
@@ -73,7 +75,7 @@ useEffect(() => {
           <ToastContainer transition={Slide} /> 
       
         <Routes>
-          <Route path="/" element={<Home userid={userid} />} />
+          <Route path="/" element={<Home userid={userid} firstname={firstname}/>} />
           <Route path="/Home" element={<Home  userid={userid}/>} />
           <Route path="/History" element={<History userid={userid} isAuthenticated={isAuthenticated} />} />
           <Route path="/Aboutus" element={<AboutUs />} />

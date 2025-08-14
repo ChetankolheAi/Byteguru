@@ -4,10 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 export const notify = (message, type = "info") => {
     toast[type](message, {
         position: "top-right", 
-        autoClose: 9000,        
-        hideProgressBar: false, 
-        closeOnClick: false,   
-        pauseOnHover: true,
+        autoClose: 3000,        
+        hideProgressBar: true, 
+        closeOnClick: true,   
+        pauseOnHover: false,
         draggable: true, 
         transition: Slide,   
         theme: "dark",          

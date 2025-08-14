@@ -93,7 +93,6 @@ useEffect(() => {
       window.dispatchEvent(new Event('storage'));
       notify("User Logged Out Successfully" ,'success');
       navigate('/login');
-      window.location.reload(); 
     }
   };
 
@@ -103,7 +102,7 @@ useEffect(() => {
 
     
     <>
- 
+{isOpen && <div className="overlay active"></div>}
 <div
   className={`SideContainer ${isOpen ? 'open' : ''}`}
   style={{
