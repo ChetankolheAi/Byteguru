@@ -89,6 +89,7 @@ function Chatpage({userid,firstname}) {
 
   } catch (err) {
     console.error('Gemini API error:', err);
+    notify('Gemini API error:- Server Not Responding');
     setChatHistory((prev) => [
       ...prev,
       { sender: 'bot', text: 'Error connecting to Gemini API' },

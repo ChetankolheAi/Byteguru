@@ -1,5 +1,6 @@
 :root {
   --theme-color: rgb(137, 0, 96); 
+  --theme-color-darker:color-mix(in srgb, var(--theme-color) 50%, black);
   --theme-color-dark:color-mix(in srgb, var(--theme-color) 70%, black);
   --theme-color-dark-1:color-mix(in srgb, var(--theme-color) 50%, black);
   --theme-color-light:color-mix(in srgb, var(--theme-color) 50%, rgb(255, 255, 255));
@@ -49,7 +50,7 @@ h2{
 .chat-message.user {
   margin-left: auto;
   font-weight: 400;
-   background-color: color-mix(in srgb, var(--theme-color) 80%, black);
+   background-color: rgb(198, 198, 198);
   color: var(--theme-color);
 }
 /* .navbar{

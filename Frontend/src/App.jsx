@@ -10,6 +10,7 @@ import Signup from './Signup/Signup'
 import History from './History/History'
 import AboutUs from './AboutUs/AboutUs';
 import Navbar from './Navbar/navbar';
+import Ide from './Ide/Ide'
 import { API_URL } from "./utils";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -81,6 +82,7 @@ useEffect(() => {
           <Route path="/Aboutus" element={<AboutUs />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          <Route path="/Ide" element={<Ide />} />
   
         </Routes>
       </div>

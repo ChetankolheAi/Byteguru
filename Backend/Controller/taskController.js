@@ -1,5 +1,6 @@
 import {Login_details ,Chatbothistory_Details} from '../Model/model.js'; 
 import bcrypt from "bcryptjs";
+import axios from 'axios';
 
 import jwt from 'jsonwebtoken';
 
@@ -127,6 +128,74 @@ const signup = async (req,res)=>{
     res.status(500).json({ error: "Server error" });
   }
 };
+const CodeAnalyser = async (req, res) => {
+  const { prompt } = req.body;
+  console.log("Code received:", prompt);
+
+  if (!prompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+
+  try {
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `
+You are a code analyzer AI. Analyze the following code and return results in **valid JSON only**.
+
+Code:
+${prompt}
+
+Your JSON response must include:
+{
+  "language": "...",
+  "topic": "...",
+  "accuracy": "...",
+  "time_complexity": "...",
+  "space_complexity": "...",
+  "improvements": "...",
+  "edge_cases": "..."
+}
+                `,
+              },
+            ],
+          },
+        ],
+      }
+    );
+
+    let geminiText =
+      response.data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+
+    // Trim whitespace
+    geminiText = geminiText.trim();
+
+    let analysis;
+    try {
+      // Remove markdown ```json ``` block if present
+      const match = geminiText.match(/```json\s*([\s\S]*?)\s*```/i);
+      if (match && match[1]) {
+        analysis = JSON.parse(match[1]);
+      } else {
+        analysis = JSON.parse(geminiText);
+      }
+    } catch (err) {
+      console.error("JSON parse error:", err.message);
+      analysis = { error: "Failed to parse Gemini response", raw: geminiText };
+    }
+
+    res.status(200).json({ response: analysis });
+  } catch (err) {
+    console.error("Gemini API error:", err.message);
+    res.status(503).json({ error: "Gemini service unavailable" });
+  }
+};
+
 
 const verify = (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
@@ -149,4 +218,4 @@ const verify = (req, res) => {
 
 
 
-export {signup , Login , SaveHistory,GetHistory ,verify}
+export {signup , Login , SaveHistory,GetHistory ,verify ,CodeAnalyser}

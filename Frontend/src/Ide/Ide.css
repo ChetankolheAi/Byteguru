@@ -1,0 +1,290 @@
+.container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch; /* ✅ makes both sections expand equally */
+  height: calc(100vh - 50px); /* avoids double scrollbars */
+}
+
+.buttons {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: flex-end;
+  background: linear-gradient(135deg, var(--theme-color), var(--theme-color-darker));
+  /* border-bottom: 1px solid rgba(255,255,255,0.1); */
+}
+
+.buttons button {
+  margin-left: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--theme-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.buttons button:hover {
+  color: #000;
+  background-color: var(--theme-color-light);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+#Gemini img{
+    color: black;
+}
+
+.CodeEditor {
+  background-color: var(--theme-color-darker);
+  flex: 1;
+  border-right: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.Analyzer {
+  background-color: #f5f5f5;
+  flex: 1;
+  
+  overflow-y: auto;
+}
+
+.Analyzer h3{
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-size: 30px;
+    font-style: normal;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white  ;
+    background: linear-gradient(135deg, var(--theme-color), var(--theme-color-darker));
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    transform: translateY(-20px);
+}
+/* Container for all analysis boxes */
+#outerAnalyzerResult {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* Space between boxes */
+    margin-top: 15px;
+    padding: 0px 20px;
+}
+
+/* Individual analysis boxes */
+#AnalyzedBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #dcdcdc; /* Light text */
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--theme-color-dark)
+    
+}
+#AnalyzedBox strong{
+    text-transform: capitalize;
+    font-family: "Roboto", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-size: 20px;
+    font-style: normal;
+    color: black;
+}
+#AnalyzedBox p{
+    color: white;
+    margin: "5px 0 0 0";
+    font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+    
+}
+.Box1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    
+    border-radius: 10px;
+    margin: 10px 10px;
+}
+.Box1 .box{
+    background-color: var(--theme-color-darker);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.Box1 .box strong{
+    background-color: var(--theme-color-darker);
+    color: rgb(221, 221, 221);
+   
+    border-radius: 10px;
+}
+.Box2{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    
+    border-radius: 10px;
+    margin: 10px 10px;
+}
+.Box3 .box{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 10px 10px;
+    
+}
+.Box4 .box{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px  30px ;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 10px 10px;
+    
+}
+.Analyzer strong{
+    color: var(--theme-color-darker);
+    font-family: "Winky Rough", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  margin-right: 10px;
+  font-size: 20px;
+}
+.submit{
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+@media (max-width: 1400px) {
+   .Box1 .box {
+  
+    padding: 10px;
+    
+    }
+}
+@media (max-width: 1500px) {
+    .Box1{
+        flex-direction: column;
+    }
+   .Box1 .box {
+    padding: 10px;
+    margin-top: 10px;    
+    }
+}
+@media (max-width: 800px) {
+    .Box2 {
+        flex-direction: column;
+    }
+    .Box2 .box{
+        margin-top: 10px;
+    }
+}
+@media (max-width: 800px) {
+       .Analyzer h3{
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-size: 30px;
+    font-style: normal;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white  ;
+    background-color: var(--theme-color-darker);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    transform: translateY(-20px);
+    margin-bottom: 0px;
+}
+.Box3 .box {
+    padding: 15px 20px;
+}
+.Box4 .box {
+    padding: 15px 20px;
+}
+.Box1 {
+
+    padding: 15px 20px; 
+}
+.Box2 {
+
+    padding: 15px 20px; 
+}
+}
+@media (max-width: 700px) {
+    .container {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch; /* ✅ makes both sections expand equally */
+        height: calc(100vh - 50px); /* avoids double scrollbars */
+    }
+    .CodeEditor {
+        background-color: var(--theme-color-darker);
+        flex: 1;
+        border-right: 2px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .Analyzer {
+        background-color: #f5f5f5;
+        flex: 0.5;
+        height: 20%;
+        overflow-y: auto;
+    }
+    .Analyzer h3{
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-size: 30px;
+    font-style: normal;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white  ;
+    background-color: var(--theme-color-darker);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    transform: translateY(-20px);
+    margin-bottom: 0px;
+}
+.Box3 .box {
+    padding: 15px 20px;
+}
+.Box4 .box {
+    padding: 15px 20px;
+}
+.Box1 {
+
+    padding: 15px 20px; 
+}
+.Box2 {
+
+    padding: 15px 20px; 
+}
+}
