@@ -27,7 +27,7 @@ function Chatpage({userid,firstname}) {
     } else if (hours >= 17 && hours < 21) {
       setGreeting("Good Evening");
     } else {
-      setGreeting("Good Night");
+      setGreeting("Good Evening");
     }
   }, []);
   const handleGeminiCall = async () => {
@@ -102,6 +102,7 @@ function Chatpage({userid,firstname}) {
 
 
   return (
+    
     <div className="Container">
       <div className="chat-container">
         <div className="chat-box">

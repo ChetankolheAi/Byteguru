@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "aos": "^2.3.4",
     "axios": "^1.12.2",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.546.0",
     "marked": "^16.1.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

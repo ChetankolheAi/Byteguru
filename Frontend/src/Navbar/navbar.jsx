@@ -30,7 +30,7 @@ function Navbar({ isOpen, toggleSidebar }) {
         <i className={`fa-solid ${isOpen ? 'fa-bars-staggered' : 'fa-bars'}`}></i>
       </div>
 
-      <div className="LogoName">XRayAI</div>
+      <div className="LogoName">Byteguru</div>
 
       <div className="ThemeChanger" onClick={toggleThemePanel}></div>
 

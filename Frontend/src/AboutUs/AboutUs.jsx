@@ -1,8 +1,22 @@
-import React from 'react';
+import {React,useEffect} from 'react';
 import './Aboutus.css';
+import Footer from '../Footer/Footer'
 
-function AboutUs() {
+function AboutUs({isSidebarOpen}) {
+  useEffect(() => {
+  if (isSidebarOpen) {
+    document.body.style.overflow = "hidden";  // disable scroll
+  } else {
+    document.body.style.overflow = "auto";    // re-enable scroll
+  }
+}, [isSidebarOpen]);
+const COMPANY_INFO = {
+  name: "Byteguru",
+  tagline: "Smart Instant insights, powered by intelligence",
+  copyrightYear: new Date().getFullYear(),
+};
   return (
+    <>
     <div className="Aboutus">
       <div className="about">
 
@@ -14,14 +28,14 @@ function AboutUs() {
       
         <div className="descp">
           <p>
-            Welcome to <strong>XRayAi</strong>, your intelligent AI-powered chatbot designed to make
+            Welcome to <strong>{COMPANY_INFO.name}</strong>, your intelligent AI-powered Web-App designed to make
             conversations smarter, faster, and more helpful than ever.
           </p>
           <p>
             Built with the <strong>MERN Stack</strong> (MongoDB, Express.js, React.js, and Node.js), 
-            XRayAi combines the power of modern web technologies with advanced AI to deliver an interactive 
+            {COMPANY_INFO.name} combines the power of modern web technologies with advanced AI to deliver an interactive 
             and personalized chat experience. Whether you need quick answers, detailed explanations, 
-            or just a friendly conversation, XRayAi is here to assist — anytime, anywhere.
+            or just a friendly conversation, {COMPANY_INFO.name} is here to assist — anytime, anywhere.
           </p>
         </div>
 
@@ -60,7 +74,7 @@ function AboutUs() {
         <div className="section license">
           <h2>License</h2>
           <p>
-            <strong>© 2025 XRayAi    </strong>
+            <strong>© 2025 {COMPANY_INFO.name}    </strong>
               _You are free to use, modify, and distribute with proper attribution.
           </p>
         </div>
@@ -69,12 +83,15 @@ function AboutUs() {
         <div className="section funfact">
           <h2>Fun Fact</h2>
           <p>
-            XRayAi isn’t just about answering questions — it’s about understanding <em>you</em>. 
+            {COMPANY_INFO.name} isn’t just about answering questions — it’s about understanding <em>you</em>. 
             Our goal is to make technology feel more human and less robotic.
           </p>
         </div>
       </div>
+
     </div>
+      <Footer/>
+      </>
   );
 }
 

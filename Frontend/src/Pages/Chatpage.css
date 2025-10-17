@@ -1,19 +1,25 @@
 .Container {
-
-  height: calc(93vh - 50px); /* Adjust height to account for top margin */
-  margin-top: 50px;           /* Always keep 50px space from top */
+  height: 100vh;
+  /* margin-top: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 15px;
+  background-color: white; /* add solid background for contrast */
+  background-image:
+    linear-gradient(#edebeb 1px, transparent 1px),
+    linear-gradient(90deg, #e6e4e4 1px, transparent 1px);
+  background-size: 40px 40px;
+  
 }
+
 
 
 .chat-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #ffffff00;
+  background: #6d010100;
   border-radius: 15px;
   font-family: 'Segoe UI', sans-serif;
   width: 100%;
@@ -21,6 +27,8 @@
   height: 100%;
   max-height: 90vh;
   padding: 10px;
+  margin-top: 50px;
+  
 }
 
 ::-webkit-scrollbar {
@@ -108,7 +116,11 @@
   font-size: 1.5rem;
   color: #606060;
 }
+.Main-Container-chatbot{
+  display: flex;
+  flex-direction: row;
 
+}
 /* ===== Responsive Breakpoints ===== */
 
 @media (max-width: 768px) {

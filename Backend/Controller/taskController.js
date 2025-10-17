@@ -138,7 +138,7 @@ const CodeAnalyser = async (req, res) => {
 
   try {
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_APIKEY}`,
       {
         contents: [
           {

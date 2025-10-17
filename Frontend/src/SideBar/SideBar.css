@@ -79,14 +79,40 @@
   font-weight: 700;
   font-style: normal;
 }
-.SideContainerMobileSize{
+.SideContainerMobileSize {
   display: none;
-  position: absolute;
-  background-color:  var(--theme-color-dark-1);
-  height: calc(100% - 50px);
- z-index: 1000;
+  position: fixed; /* stays in place even when scrolling */
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 95vh;
+  background-color: var(--theme-color-dark-1);
+  z-index: 1000;
+  overflow-y: auto;
+ 
+  margin-top: 50px;
 
+  transform: translateX(-250px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
+
+/* When sidebar is open */
+.SideContainerMobileSize.open {
+  opacity: 1;
+  transition: 1.4s ease-in-out;
+  transform: translateX(0);
+}
+
+/* Inside media query */
+@media (max-width: 1000px) {
+  .SideContainerMobileSize {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
 /* Overlay to disable background clicks */
 .overlay {
   position: fixed;
@@ -94,14 +120,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
-  z-index: 998; /* one less than sidebar */
-  display: none;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .overlay.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
+
 
 .ok{
   display: flex;

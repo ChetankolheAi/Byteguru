@@ -5,7 +5,7 @@
   padding-top: 10px;
   background: #ffffff;
   min-height: 100vh;
-  margin-top: 50px;
+  padding-top: 90px;
 }
 
 .about {
@@ -72,5 +72,6 @@
     }
     .Aboutus{
         padding: 10px;
+        padding-top: 50px;
     }
 }

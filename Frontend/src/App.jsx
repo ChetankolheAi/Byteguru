@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer , Slide} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Home from './Pages/Chatpage';
+import Chatbot from './Pages/Chatpage';
 import SideBar from './SideBar/SideBar';
 import Login from './Login/Login';
 import Signup from './Signup/Signup'
@@ -11,7 +11,10 @@ import History from './History/History'
 import AboutUs from './AboutUs/AboutUs';
 import Navbar from './Navbar/navbar';
 import Ide from './Ide/Ide'
+import Landing from './LandingPage/Landing'
 import { API_URL } from "./utils";
+import Footer from './Footer/Footer'
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userid, setuserid] = useState("");
@@ -76,10 +79,11 @@ useEffect(() => {
           <ToastContainer transition={Slide} /> 
       
         <Routes>
-          <Route path="/" element={<Home userid={userid} firstname={firstname}/>} />
-          <Route path="/Home" element={<Home  userid={userid}/>} />
+          {/* <Route path="/" element={<Home userid={userid} firstname={firstname}/>} /> */}
+          <Route path="/" element={<Landing  isSidebarOpen={isSidebarOpen}/>}/>
+          <Route path="/Chatbot" element={<Chatbot  userid={userid} firstname={firstname}/>} />
           <Route path="/History" element={<History userid={userid} isAuthenticated={isAuthenticated} />} />
-          <Route path="/Aboutus" element={<AboutUs />} />
+          <Route path="/Aboutus" element={<AboutUs isSidebarOpen={isSidebarOpen}/>} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Ide" element={<Ide />} />
