@@ -14,6 +14,15 @@ import Ide from './Ide/Ide'
 import Landing from './LandingPage/Landing'
 import { API_URL } from "./utils";
 import Footer from './Footer/Footer'
+import Visualization from './Visualization/BubbleSorting'
+import DSA from './DSA/DSA_Landing'
+import Services from './Services/Services'
+
+import BubbleSorting from './Visualization/BubbleSorting';
+import InsertionSort from './Visualization/Insertionsort';
+import MergeSort from './Visualization/MergeSort';
+import SelectionSort from './Visualization/SelectionSort';
+import QuickSort from './Visualization/QuickSort';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -86,7 +95,15 @@ useEffect(() => {
           <Route path="/Aboutus" element={<AboutUs isSidebarOpen={isSidebarOpen}/>} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Ide" element={<Ide />} />
+          <Route path="/code-analyzer" element={<Ide />} />
+          <Route path="/Sorting" element={<Visualization />} />
+          <Route path="/dsa-visualizer" element={<DSA />} />
+          <Route path="/Services" element={<Services />} />
+          <Route path="/BubbleSort" element={<BubbleSorting />} />
+          <Route path="/InsertionSort" element={<InsertionSort />} />
+          <Route path="/MergeSort" element={<MergeSort />} />
+          <Route path="/SelectionSort" element={<SelectionSort />} />
+          <Route path="/QuickSort" element={<QuickSort />} />
   
         </Routes>
       </div>

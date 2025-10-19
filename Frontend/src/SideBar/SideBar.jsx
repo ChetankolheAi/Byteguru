@@ -125,10 +125,8 @@ useEffect(() => {
         }
       </div>
       <div className={`nav-item ${currentPath === '/' ?  'active' : ''}`} ><Link to="/"><i className="fa-solid fa-home"></i>Home</Link></div>
-      <div className={`nav-item ${currentPath === '/Ide' ?  'active' : ''}`} ><Link to="/Ide"><i className="fa-solid fa-star"></i>Code Analyzer</Link></div>
-      <div className={`nav-item ${currentPath === '/Chatbot' ?  'active' : ''}`} ><Link to="/Chatbot"><i className="fa-solid fa-comments"></i> ChatBot</Link></div>
-      <div className={`nav-item ${currentPath === '/History' ? 'active' : ''}`} ><Link to="/History"><i className="fa-solid fa-clock-rotate-left"></i> History</Link></div>
       {/* <div className="nav-item"><Link to="/"><i className="fa-solid fa-highlighter"></i> Styling</Link></div> */}
+      <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i className="fa-regular fa-gear"></i> Service</Link></div>
       <div className={`nav-item ${currentPath === '/Aboutus' ? 'active' : ''}`} ><Link to="/Aboutus"><i className="fa-regular fa-address-card"></i> AboutUs</Link></div>
       {isAuthenticated
         ?
@@ -173,9 +171,8 @@ useEffect(() => {
 >   
     <div className="con1MobileSize">
         <div className={`nav-item ${currentPath === '/' ?  'active' : ''}`} ><Link to="/"><i className="fa-solid fa-home"></i> Home</Link></div>
-        <div className={`nav-item ${currentPath === '/Ide' ?  'active' : ''}`} ><Link to="/Ide"><i className="fa-solid fa-star"></i>Code Analyzer</Link></div>
-        <div className={`nav-item ${currentPath === '/Chatbot' ? 'active' : ''}`} ><Link to="/Chatbot"><i className="fa-solid fa-comments"></i> ChatBot</Link></div>
-        <div className={`nav-item ${currentPath === '/History' ? 'active' : ''}`} ><Link to="/History"><i className="fa-solid fa-clock-rotate-left"></i> History</Link></div>
+        <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i className="fa-regular fa-gear"></i> Service</Link></div>
+
         {/* <div className="nav-item"><Link to="/"><i className="fa-solid fa-highlighter"></i> Styling</Link></div> */}
         <div className={`nav-item ${currentPath === '/Aboutus' ? 'active' : ''}`} ><Link to="/Aboutus"><i className="fa-regular fa-address-card"></i> AboutUs</Link></div>
       {isAuthenticated

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import './navbar.css';
 import ThemeChanger from '../ThemeChange/ThemeChanger';
 
@@ -30,7 +32,10 @@ function Navbar({ isOpen, toggleSidebar }) {
         <i className={`fa-solid ${isOpen ? 'fa-bars-staggered' : 'fa-bars'}`}></i>
       </div>
 
-      <div className="LogoName">Byteguru</div>
+                 <div className="LogoName">  <Link to='/'>Byteguru </Link></div>
+       
+         
+     
 
       <div className="ThemeChanger" onClick={toggleThemePanel}></div>
 
