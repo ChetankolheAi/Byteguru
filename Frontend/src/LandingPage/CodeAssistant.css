@@ -594,6 +594,10 @@ max-width: 1000px;
   line-height: 1.6;
 }
 @media (max-width: 1000px) {
+  .DSA-card-track {
+  
+  animation: scrollLeft 50s linear infinite;
+}
   .BotQuots h1 {
     
     font-size: 30px;
@@ -623,7 +627,10 @@ max-width: 1000px;
 
 @media (max-width: 500px) {
   
+  .DSA-card-track {
   
+  animation: scrollLeft 30s linear infinite;
+}
 .BotQuots h1 {
     
     font-size: 30px;
