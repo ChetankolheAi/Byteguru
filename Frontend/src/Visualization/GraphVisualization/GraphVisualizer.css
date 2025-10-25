@@ -1,0 +1,90 @@
+.svg-visualizer {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  max-width: 920px;
+  margin: 18px auto;
+  text-align: center;
+  color: #222;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.control-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.control-row.small-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.mode-badge {
+  margin-left: 12px;
+  padding: 4px 8px;
+  background: #ff5252;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.grid-svg {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff 0%, #fcfcfc 100%);
+  box-shadow: 0 6px 20px rgba(30, 30, 30, 0.06);
+  margin: 8px auto;
+  display: block;
+  max-width: 100%;
+}
+
+.cell-group:hover rect {
+  filter: brightness(0.98);
+  transform-origin: center;
+}
+
+.visited-pulse {
+  animation: pulse 900ms linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.08;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.25;
+  }
+}
+
+/* Buttons look */
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+.speed-value {
+  min-width: 60px;
+  text-align: left;
+  font-weight: 600;
+}

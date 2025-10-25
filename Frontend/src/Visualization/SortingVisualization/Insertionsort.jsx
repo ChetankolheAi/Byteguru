@@ -1,4 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { API_URL, notify } from '../../utils.js';
+import { marked } from 'marked';
+import Gemini from '../Gemini.png';
+
+import "./Sorting1.css";
 
 function Insertionsort() {
   const [array, setArray] = useState([]);
@@ -9,7 +14,9 @@ function Insertionsort() {
   const [speed, setSpeed] = useState(200);
   const speedRef = useRef(speed);
   const stopSorting = useRef(false);
-
+  const [botMessage, setBotMessage] = useState("");
+  const [loading, setLoading] = useState(false); // ✅ added
+  
   useEffect(() => {
     resetArray();
   }, []);
@@ -70,6 +77,39 @@ function Insertionsort() {
     setActiveIndex(-1);
     setSortedIndices(newArray.map((_, idx) => idx));
   };
+const handleGeminiCall = async () => {
+    if (!array.length) {
+      notify("Array is empty — please generate one first.");
+      return;
+    }
+    setLoading(true);
+    const prompt = `Explain step-by-step how insertion Sort works on this array: [${array.join(", ")}]. Include how comparisons and swaps happen in each pass.`;
+
+    try {
+      const res = await fetch(`${API_URL}/api/gemini`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const data = await res.json();
+      if (res.status === 400) {
+        notify(data.error || 'Bad request');
+        return;
+      }
+
+      const markdown = data.response || '';
+      const html = marked.parse(markdown);
+
+      if (html) setBotMessage(html); // ✅ Store explanation
+    } catch (err) {
+      console.error('Gemini API error:', err);
+      notify('Gemini API error: Server Not Responding');
+    }finally {
+      setLoading(false); // ✅ stop loading always
+    }
+  };
+
 
   return (
     <div className="visualizer">
@@ -97,9 +137,25 @@ function Insertionsort() {
 
           );
         })}
-        <span>Key:</span><div className="key">{key}</div>
+        <span>Key:</span><div className="key" style={{background:"#bf00ffff"}}>{key}</div>
       </div>
-
+        <section className="info">
+        <div className="info-section">
+          <div className="sec1">
+              <div className="bar-container barinfo" height={10} style={{background:"#4caf50"}}></div>
+            <label htmlFor="">Sorted Portion</label>
+          </div>
+          <div className="sec1">
+              <div className="bar-container barinfo" height={10} style={{background:"#ff5252"}}></div>
+              <label htmlFor="">Comparing in Sorted Portion</label>
+          </div>
+          <div className="sec1">
+              <div className="bar-container barinfo" height={10} style={{background:"#bf00ffff"}}></div>
+              <label htmlFor="">Current Element (Key)</label>
+          </div>
+          
+        </div>
+      </section>
       <div className="bottom-btn">
         <div className="buttons-sort">
           <div className="slider-control" style={{ "--value": speed }}>
@@ -129,6 +185,16 @@ function Insertionsort() {
           </div>
         </div>
       </div>
+       <div className="gen-btn">
+              <button onClick={handleGeminiCall} className="buttonGenerate">
+                {loading ? "Generating..." : "Generate Explanation"}{" "}
+                {!loading && <img src="https://res.cloudinary.com/dmuecdqxy/q_auto/v1737001422/static/magiciconwhitegradientsvg_1737001421_51952.svg" className="v3-prompt-button-star-icon" alt="" height={20} width={30} />}
+              </button>
+            </div>
+      
+            {loading && <div className="loading-spinner"></div>} {/* ✅ optional spinner */}
+            <div className="ans" dangerouslySetInnerHTML={{ __html: botMessage }}></div>
+          
     </div>
   );
 }

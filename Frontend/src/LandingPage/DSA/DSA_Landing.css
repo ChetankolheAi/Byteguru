@@ -71,6 +71,8 @@ hr{
 @media(max-width:1000px) {
   .inner_Algorithm {
     padding: 20px;
+    /* margin-left: 40px; */
+    margin-bottom: 60px;
   }
   .Algorithm h1 {
     padding: 20px;
@@ -78,9 +80,9 @@ hr{
 }
 .Algorithm button{
     
-    padding: 15px 22px; /* Adjust padding to control button size */
+    padding: 10px 12px; /* Adjust padding to control button size */
     font-family: sans-serif; /* Use a common sans-serif font */
-    font-size: 14px; /* Adjust font size */
+    font-size: 15px; /* Adjust font size */
     
 }
 }

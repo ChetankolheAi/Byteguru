@@ -9,8 +9,9 @@ import Algorithm from './img/algorithm.png'
 import Chart from './img/chart.png'
 import Machine from './img/machine-learning.png'
 import Gears from './img/settings-gears.png'
-import Java from './img/java.png'
+import Bar from './img/bot.webp'
 import Footer from '../Footer/Footer'
+
 
 const randomReviews = [
   {
@@ -68,7 +69,7 @@ const Landing = ({isSidebarOpen}) => {
       <header className="header">
         <h1 data-aos="zoom-in" >AI-Powered Code Assistant</h1>
         <p data-aos="zoom-in" >
-          Elevate your coding with intelligent analysis, real-time assistance,
+          Elevate your coding with intelligent analysis, real-time assistance, algorithm visualization
           and actionable insights. Write better code, faster.
         </p>
         <div data-aos="zoom-in" className="btn-group">
@@ -89,6 +90,7 @@ const Landing = ({isSidebarOpen}) => {
          
         </div>
       </header>
+      
      <section class="DSA-card-section" data-aos="zoom-out">
       <div class="scroll-frame">
         <div class="scroll-border left-border"></div>
@@ -184,6 +186,25 @@ const Landing = ({isSidebarOpen}) => {
         <div class="scroll-border right-border"></div>
       </div>
     </section>
+    <section className="dsa-ai-section" data-aos="fade-left">
+        <div className="ai-section">
+        {/* Left card */}
+        <div >
+          <img src={Bar} className="ai-left" alt="" />
+        </div>
+
+        {/* Right content */}
+        <div className="ai-right">
+          <h2>Use AI Magic to understand your algorithms better</h2>
+          <p>
+            Want to see how your algorithm works? Our AI feature generates
+            detailed explanations of your input — showing each step and helping
+            you visualize the logic clearly.
+          </p>
+            <Link to='/Services'><button className="build-btn">⚡ Generate Explanation with AI</button></Link>
+        </div>
+      </div>
+    </section>
     <section className="Bot">
         <div className="BotContainer">
             <div className="BotQuots" data-aos="fade-right">
@@ -200,6 +221,7 @@ const Landing = ({isSidebarOpen}) => {
       
         </div>
     </section>
+    
       <section className="features-grid">
         <div className="features-track">
   <div data-aos="fade-right" className="feature-card blue">

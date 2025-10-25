@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import './Chatpage.css';
 import { marked } from 'marked';
-import { API_URL, notify } from '../utils.js';
+import { API_URL, notify } from '../../utils.js';
 
 function Chatpage({userid,firstname}) {
   const [userInput, setUserInput] = useState('');

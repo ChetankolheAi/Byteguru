@@ -1,7 +1,7 @@
 import {React,useState,useEffect} from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import './SideBar.css';
-import { API_URL, notify } from '../utils';
+import { API_URL, notify } from '../../utils';
 
 function SideBar({ isOpen }) {
 

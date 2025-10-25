@@ -1,8 +1,18 @@
-import React from 'react'
+import {React,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import './DSA_Landing.css'
 function DSA_Landing() {
 
+  // After successful login
+useEffect(() => {
+  // Enable scrolling
+  document.body.style.overflow = "auto";
+
+  // Optional: cleanup if component unmounts
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, []);
 
   return (
     <div className="continer-dsa">
@@ -31,8 +41,20 @@ function DSA_Landing() {
             <Link to='/ExponentialSearch'><button>Exponential Search</button></Link>
 
             <hr />
+            <h3>Tree Algorithms</h3>
+            <Link to='/TreeTraversalVisualizer'><button>Tree Traversals (In,Pre,Post)</button></Link>
+            <Link to='/TreeHeightVisualizer'><button>Tree Height</button></Link>
+            <Link to='/BSTInsertion'><button>BST Insertion</button></Link>
+            <Link to='/BSTSearch'><button>BST Search</button></Link>
+            <Link to='/LowestCommonAncestor'><button>Lowest Common Ancestor</button></Link>
+            <Link to='/LevelOrderTraversal'><button>Level Order Traversal (BFS)</button></Link>
+            <Link to='/DiameterOfTree'><button>Diameter of Tree</button></Link>
+            <Link to='/BalanceCheck'><button>Check if Tree is Balanced</button></Link>
+            
+            
+            <hr />
             <h3>Graph Algorithms</h3>
-            <Link to='/DFS'><button>DFS</button></Link>
+            <Link to='/GraphVisualizer'><button>DFS</button></Link>
             <Link to='/BFS'><button>BFS</button></Link>
             <Link to='/Dijkstra'><button>Dijkstra</button></Link>
             <Link to='/BellmanFord'><button>Bellman-Ford</button></Link>
@@ -40,12 +62,7 @@ function DSA_Landing() {
             <Link to='/PrimMST'><button>Prim's MST</button></Link>
             <Link to='/KruskalMST'><button>Kruskal's MST</button></Link>
 
-            <hr />
-            <h3>Dynamic Programming Algorithms</h3>
-            <Link to='/Knapsack'><button>0/1 Knapsack</button></Link>
-            <Link to='/LCS'><button>LCS</button></Link>
-            <Link to='/MatrixChain'><button>Matrix Chain Multiplication</button></Link>
-            <Link to='/CoinChange'><button>Coin Change</button></Link>
+
           </div>
 
       </div>

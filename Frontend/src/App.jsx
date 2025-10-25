@@ -3,33 +3,50 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer , Slide} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Chatbot from './Pages/Chatpage';
-import SideBar from './SideBar/SideBar';
+import Chatbot from './Pages/Chatbot/Chatpage';
+import SideBar from './Navbar/SideBar/SideBar';
 import Login from './Login/Login';
 import Signup from './Signup/Signup'
 import History from './History/History'
-import AboutUs from './AboutUs/AboutUs';
+import AboutUs from './Pages/AboutUs/AboutUs';
 import Navbar from './Navbar/navbar';
 import Ide from './Ide/Ide'
 import Landing from './LandingPage/Landing'
 import { API_URL } from "./utils";
 import Footer from './Footer/Footer'
-import Visualization from './Visualization/BubbleSorting'
-import DSA from './DSA/DSA_Landing'
+
+import DSA from './LandingPage/DSA/DSA_Landing'
 import Services from './Services/Services'
 
-import BubbleSorting from './Visualization/BubbleSorting';
-import InsertionSort from './Visualization/Insertionsort';
-import MergeSort from './Visualization/MergeSort';
-import SelectionSort from './Visualization/SelectionSort';
-import QuickSort from './Visualization/QuickSort';
 
+//sorting
+import BubbleSorting from './Visualization/SortingVisualization/BubbleSorting';
+import InsertionSort from './Visualization/SortingVisualization/Insertionsort';
+import MergeSort from './Visualization/SortingVisualization/MergeSort';
+import SelectionSort from './Visualization/SortingVisualization/SelectionSort';
+import QuickSort from './Visualization/SortingVisualization/QuickSort';
+
+//Tree
+import TreeHeightVisualizer from './Visualization/TreeVisualization/TreeHeightDiameterVisualizer';
+import TreeTraversalVisualizer from './Visualization/TreeVisualization/TreeTraversalVisualizer ';
+
+//Graph
+import GraphVisualizer from './Visualization/GraphVisualization/GraphVisualizer';
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userid, setuserid] = useState("");
   const [firstname, srtFirstname] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-useEffect(() => {
+  
+  useEffect(() => {
+
+    document.body.style.overflow = "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+ 
+  useEffect(() => {
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -96,7 +113,7 @@ useEffect(() => {
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/code-analyzer" element={<Ide />} />
-          <Route path="/Sorting" element={<Visualization />} />
+        
           <Route path="/dsa-visualizer" element={<DSA />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/BubbleSort" element={<BubbleSorting />} />
@@ -104,7 +121,12 @@ useEffect(() => {
           <Route path="/MergeSort" element={<MergeSort />} />
           <Route path="/SelectionSort" element={<SelectionSort />} />
           <Route path="/QuickSort" element={<QuickSort />} />
-  
+      
+          <Route path="/TreeHeightVisualizer" element={<TreeHeightVisualizer />} />
+          <Route path="/TreeTraversalVisualizer" element={<TreeTraversalVisualizer />} />
+
+          <Route path="/GraphVisualizer" element={<GraphVisualizer />} />
+
         </Routes>
       </div>
     </Router>

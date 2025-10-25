@@ -1,6 +1,6 @@
 import {React,useEffect} from 'react';
 import './Aboutus.css';
-import Footer from '../Footer/Footer'
+import Footer from '../../Footer/Footer'
 
 function AboutUs({isSidebarOpen}) {
   useEffect(() => {

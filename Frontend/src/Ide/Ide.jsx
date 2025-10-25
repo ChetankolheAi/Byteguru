@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import './Ide.css';
 import Loader from '../Loader.jsx';
 import { API_URL } from '../utils';
-import Gemini from '../Gemini.png';
+import Gemini from './Gemini.png';
 
 function Ide() {
   const [code, setCode] = useState("// Write your code here");
