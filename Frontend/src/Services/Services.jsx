@@ -4,13 +4,38 @@ import "./Services.css"; // We'll create CSS for styling
 import AOS from "aos";
 import "aos/dist/aos.css";
 const services = [
-    { title: "DSA Visualizer", description: "Visualize sorting, searching, and graph algorithms.", path: "/dsa-visualizer" },
-  { title: "Chatbot", description: "Interact with our AI chatbot in real-time.", path: "/Chatbot" },
-  { title: "Code Analyzer", description: "Analyze your code for errors and efficiency.", path: "/code-analyzer" },
-  { title: "AI Bot", description: "Get AI-powered assistance for various tasks.", path: "/ai-bot" },
-  { title: "Chatbot History", description: "View your past chatbot conversations.", path: "/History" },
-  { title: "Security", description: "Check and improve the security of your applications.", path: "/security" },
+  { 
+    title: "DSA Visualizer", 
+    description: "Visualize sorting, searching, and graph algorithms.", 
+    path: "/dsa-visualizer" 
+  },
+  { 
+    title: "AI Generated Coding Test", 
+    description: "Generate tests through AI to check your coding skills and evaluate your performance with AI.", 
+    path: "/QuizGenerator" 
+  },
+  { 
+    title: "Chatbot", 
+    description: "Interact with our AI chatbot in real-time.", 
+    path: "/Chatbot" 
+  },
+  { 
+    title: "Code Analyzer", 
+    description: "Analyze your code for errors and efficiency.", 
+    path: "/code-analyzer" 
+  },
+  { 
+    title: "Chatbot History", 
+    description: "View your past chatbot conversations.", 
+    path: "/History" 
+  },
+  { 
+    title: "Security", 
+    description: "Check and improve the security of your applications.", 
+    path: "/security" 
+  },
 ];
+
 
 function Services() {
     useEffect(() => {

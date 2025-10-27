@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import Editor from "@monaco-editor/react";
 import './Ide.css';
-import Loader from '../Loader.jsx';
+import Loader from '../Loaders/Loader.jsx';
 import { API_URL } from '../utils';
 import Gemini from './Gemini.png';
 

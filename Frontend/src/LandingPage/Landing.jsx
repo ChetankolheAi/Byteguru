@@ -9,8 +9,10 @@ import Algorithm from './img/algorithm.png'
 import Chart from './img/chart.png'
 import Machine from './img/machine-learning.png'
 import Gears from './img/settings-gears.png'
-import Bar from './img/bot.webp'
+import Bar from './img/bot2.png'
+import Bot2 from './img/bot3.png'
 import Footer from '../Footer/Footer'
+import { useNavigate } from "react-router-dom";
 
 
 const randomReviews = [
@@ -44,6 +46,33 @@ const randomReviews = [
 
 
 const Landing = ({isSidebarOpen}) => {
+   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
+
+ useEffect(() => {
+  // Check if popup was already closed in this session
+  const popupClosed = sessionStorage.getItem("popupClosed");
+
+  if (!popupClosed) {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 5000); // show after 5 seconds
+
+    return () => clearTimeout(timer);
+  }
+}, []);
+
+
+
+  const handleClose = () => {
+  setShowPopup(false);
+  sessionStorage.setItem("popupClosed", "true"); // prevent reopening in this session
+};
+
+  const handleStartTest = () => {
+    setShowPopup(false);
+    navigate("/QuizGenerator"); // 🔗 go to test page
+  };
   const [feedback, setFeedback] = useState("");
   useEffect(() => {
     AOS.init({ duration: 1000, once: true }); // animation lasts 1s
@@ -64,6 +93,24 @@ const Landing = ({isSidebarOpen}) => {
   };
   return (
     <>
+     {showPopup && (
+        <div className="popup-overlay" onClick={handleClose}>
+          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+            <h2>🧠 Test Your Coding Skills!</h2>
+            <p>
+              Challenge yourself with AI-generated coding questions and see how well you perform.
+            </p>
+            <div className="popup-actions">
+              <button className="start-btn" onClick={handleStartTest}>
+                Start Test 🚀
+              </button>
+              <button className="close-btn" onClick={handleClose}>
+                Maybe Later
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     <div className="code-assistant">
     
       <header className="header">
@@ -201,7 +248,7 @@ const Landing = ({isSidebarOpen}) => {
             detailed explanations of your input — showing each step and helping
             you visualize the logic clearly.
           </p>
-            <Link to='/Services'><button className="build-btn">⚡ Generate Explanation with AI</button></Link>
+            <Link to='/dsa-visualizer'><button className="build-btn">⚡ Generate Explanation with AI</button></Link>
         </div>
       </div>
     </section>
@@ -221,7 +268,27 @@ const Landing = ({isSidebarOpen}) => {
       
         </div>
     </section>
-    
+    <section className="test-section" data-aos="fade-up">
+  <div className="test-container">
+    <div className="test-content">
+      <h2>Test Your Coding Skills</h2>
+      <p>
+        Challenge yourself with AI-generated coding questions designed to improve your problem-solving and logic-building skills.
+        Track your performance and grow with every attempt!
+      </p>
+      <button className="test-btn" onClick={() => navigate("/QuizGenerator")}>
+        Start Test 🚀
+      </button>
+    </div>
+    <div className="test-image">
+      <img
+        src={Bot2}
+        alt="Coding Test Illustration"
+      />
+    </div>
+  </div>
+</section>
+
       <section className="features-grid">
         <div className="features-track">
   <div data-aos="fade-right" className="feature-card blue">

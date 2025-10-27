@@ -121,3 +121,90 @@ a{
   font-style: normal;
     
 }
+.ai-generator-container {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  padding: 40px;
+}
+
+.level-select {
+  margin: 15px 0;
+}
+
+.generate-btn {
+  background: #4b7bec;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.generate-btn:hover {
+  background: #3867d6;
+}
+
+.ai-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 25px;
+  font-size: 16px;
+  color: #444;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #4b7bec;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.question-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.question-list li {
+  background: #f1f2f6;
+  border-radius: 8px;
+  margin: 8px auto;
+  padding: 10px 15px;
+  width: 70%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}

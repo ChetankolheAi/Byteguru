@@ -50,7 +50,49 @@ app.post("/api/gemini", async (req, res) => {
 
 app.use('/api', taskRoutes);
 
+const questions = {
+  beginner: [
+    "Write a program to find the largest of two numbers.",
+    "Check if a number is even or odd.",
+    "Print Fibonacci series up to N terms.",
+    "Find factorial of a number.",
+    "Reverse a string.",
+    "Check if a number is prime.",
+    "Count vowels in a string."
+  ],
+  intermediate: [
+    "Implement binary search on a sorted array.",
+    "Find GCD of two numbers.",
+    "Implement a stack using an array.",
+    "Sort an array using bubble sort.",
+    "Find second largest element in an array.",
+    "Simple calculator using switch case.",
+    "Check if string is palindrome."
+  ],
+  pro: [
+    "Implement quicksort algorithm.",
+    "Design a class for Bank transactions.",
+    "Implement a linked list with insert and delete.",
+    "Implement a graph using adjacency list.",
+    "Find shortest path using Dijkstra’s algorithm.",
+    "Implement multithreading simulation in JS.",
+    "Build your own promise in JavaScript."
+  ]
+};
 
+// route to get 5 random questions by level
+app.get("/api/questions/:level", (req, res) => {
+  const { level } = req.params;
+  const levelQuestions = questions[level];
+
+  if (!levelQuestions) {
+    return res.status(400).json({ error: "Invalid level" });
+  }
+
+  // pick 5 random
+  const randomQs = levelQuestions.sort(() => 0.5 - Math.random()).slice(0, 5);
+  res.json({ level, questions: randomQs });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

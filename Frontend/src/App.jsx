@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer , Slide} from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import Chatbot from './Pages/Chatbot/Chatpage';
@@ -32,6 +33,10 @@ import TreeTraversalVisualizer from './Visualization/TreeVisualization/TreeTrave
 
 //Graph
 import GraphVisualizer from './Visualization/GraphVisualization/GraphVisualizer';
+
+
+import QuizGenerator from './QuizPages/Quizegenerator';
+import TestResult from './Loaders/TestResult'
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userid, setuserid] = useState("");
@@ -127,6 +132,7 @@ function App() {
 
           <Route path="/GraphVisualizer" element={<GraphVisualizer />} />
 
+          <Route path="/QuizGenerator" element={<QuizGenerator />} />
         </Routes>
       </div>
     </Router>
