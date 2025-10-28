@@ -1,6 +1,7 @@
 import {React,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import './DSA_Landing.css'
+import Footer from '../../Footer/Footer'
 function DSA_Landing() {
 
   // After successful login
@@ -15,7 +16,8 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className="continer-dsa">
+    <>
+     <div className="continer-dsa">
 
       <div className="Algorithm">
           <h1>Select Algorithm to Visualize</h1>
@@ -68,6 +70,9 @@ useEffect(() => {
       </div>
   
     </div>
+    <Footer/>
+    </>
+   
   )
 }
 

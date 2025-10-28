@@ -176,7 +176,7 @@ const MergeSort = () => {
           );
         })}
       </div>
-
+      
       <section className="info">
         <div className="info-section">
           <div className="sec1">

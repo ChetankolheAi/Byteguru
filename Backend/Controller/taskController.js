@@ -1,7 +1,6 @@
-import {Login_details ,Chatbothistory_Details} from '../Model/model.js'; 
+import {Login_details ,Chatbothistory_Details , TestScore_Details} from '../Model/model.js'; 
 import bcrypt from "bcryptjs";
 import axios from 'axios';
-
 import jwt from 'jsonwebtoken';
 
 
@@ -215,7 +214,57 @@ const verify = (req, res) => {
   }
 };
 
+const SaveTestScore = async (req , res) =>{
+  console.log("Received body:", req.body);
+const { userid, result } = req.body;
+if (!userid || typeof result !== "number") {
+  return res.status(400).json({ success: false, message: "Invalid input" });
+}
+
+  try {
+    const { userid, result } = req.body; // result = 0-5
+    if (!userid || typeof result !== "number") {
+      return res.status(400).json({ success: false, message: "Invalid input" });
+    }
+
+    let user = await TestScore_Details.findOne({ userid });
+
+    if (!user) {
+      user = new TestScore_Details({ userid, scores: [result] });
+    } else {
+      user.scores.push(result); // append to scores array
+    }
+
+    await user.save();
+    res.json({ success: true, message: "Score saved successfully" });
+  } catch (error) {
+    console.error("Error saving score:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+const RetriveTestScore = async (req , res) =>{
+console.log("Received Params:", req.params); // ✅ shows userid
+
+  try {
+    const { userid } = req.params;
+    const userScores = await TestScore_Details.findOne({ userid });
+
+    if (!userScores) {
+      return res.json({ success: true, scores: [] });
+    }
+
+    const chartData = userScores.scores.map((score, i) => ({
+      test: `Test ${i + 1}`,
+      correct: score
+    }));
+
+    res.json({ success: true, scores: chartData });
+  } catch (error) {
+    console.error("Error fetching scores:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 
-
-export {signup , Login , SaveHistory,GetHistory ,verify ,CodeAnalyser}
+export {signup , Login , SaveHistory,GetHistory ,verify ,CodeAnalyser , SaveTestScore , RetriveTestScore}

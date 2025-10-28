@@ -126,8 +126,14 @@ useEffect(() => {
       </div>
       <div className={`nav-item ${currentPath === '/' ?  'active' : ''}`} ><Link to="/"><i className="fa-solid fa-home"></i>Home</Link></div>
       {/* <div className="nav-item"><Link to="/"><i className="fa-solid fa-highlighter"></i> Styling</Link></div> */}
-      <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i className="fa-regular fa-gear"></i> Service</Link></div>
+      <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i class="fa-brands fa-servicestack"></i> Service</Link></div>
       <div className={`nav-item ${currentPath === '/Aboutus' ? 'active' : ''}`} ><Link to="/Aboutus"><i className="fa-regular fa-address-card"></i> AboutUs</Link></div>
+      {isAuthenticated
+        ?
+        <div className={`nav-item ${currentPath === '/Profile' ? 'active' : ''}`}><Link to="/Profile"><i className="fa-solid fa-user"></i> Profile</Link></div>
+        :
+        ""
+      }
       {isAuthenticated
         ?
         <div className={`nav-item ${currentPath === '/' ? '' : ''}`} onClick={handleLogout}><Link to="/"><i className="fa-solid fa-right-to-bracket"></i> Logout</Link></div>
@@ -171,10 +177,17 @@ useEffect(() => {
 >   
     <div className="con1MobileSize">
         <div className={`nav-item ${currentPath === '/' ?  'active' : ''}`} ><Link to="/"><i className="fa-solid fa-home"></i> Home</Link></div>
-        <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i className="fa-regular fa-gear"></i> Service</Link></div>
+        <div className={`nav-item ${currentPath === '/Services' ? 'active' : ''}`} ><Link to="/Services"><i class="fa-brands fa-servicestack"></i> Service</Link></div>
 
         {/* <div className="nav-item"><Link to="/"><i className="fa-solid fa-highlighter"></i> Styling</Link></div> */}
         <div className={`nav-item ${currentPath === '/Aboutus' ? 'active' : ''}`} ><Link to="/Aboutus"><i className="fa-regular fa-address-card"></i> AboutUs</Link></div>
+      
+      {isAuthenticated
+        ?
+        <div className={`nav-item ${currentPath === '/Profile' ? 'active' : ''}`}><Link to="/Profile"><i className="fa-solid fa-user"></i> Profile</Link></div>
+        :
+        ""
+      }
       {isAuthenticated
         ?
         <div className={`nav-item ${currentPath === '/Login' ? 'active' : ''}`} onClick={handleLogout}><Link to="/"><i className="fa-solid fa-right-to-bracket"></i> Logout</Link></div>

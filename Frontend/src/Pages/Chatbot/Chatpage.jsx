@@ -30,6 +30,9 @@ function Chatpage({userid,firstname}) {
       setGreeting("Good Evening");
     }
   }, []);
+
+
+
   const handleGeminiCall = async () => {
   if (!userInput.trim()) return;
 
@@ -53,6 +56,12 @@ function Chatpage({userid,firstname}) {
     const data = await res.json();
     if (res.status === 400) {
       notify(data.error || 'Bad request');
+      setLoading(false);
+      return;
+    }
+    else if(res.status === 503){
+      notify(data.error || 'Bad request');
+      setLoading(false);
       return;
     }
 
@@ -104,28 +113,42 @@ function Chatpage({userid,firstname}) {
   return (
     
     <div className="Container">
+      
       <div className="chat-container">
         <div className="chat-box">
-          {chatHistory && chatHistory.length > 0 ? (
-            chatHistory.map((msg, index) => (
-              <div
-                key={index}
-                className={`chat-message ${msg.sender}`}
-              >
-                {msg.sender === 'bot' ? (
+        {chatHistory && chatHistory.length > 0 ? (
+          <>
+            {chatHistory.map((msg, index) => (
+              <div key={index} className={`chat-message ${msg.sender}`}>
+                {msg.sender === "bot" ? (
                   <span dangerouslySetInnerHTML={{ __html: msg.text }} />
                 ) : (
                   <span>{msg.text}</span>
                 )}
               </div>
-            ))
-          ) : (
-            <div className="GreetingMssg">
-              <span>{greeting} ! {userid?firstname:""} </span>
-              <p>How can I help you today?</p>
-            </div>
-          )}
-        </div>
+            ))}
+
+            {/* Loader should appear only once while waiting */}
+            {loading && (
+              <div className="chat-message bot loading">
+                <div className="ai-loader">
+                  <div className="dot"></div>
+                  <div className="dot"></div>
+                  <div className="dot"></div>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="GreetingMssg">
+            <span>
+              {greeting}! {userid ? firstname : ""}
+            </span>
+            <p>How can I help you today?</p>
+          </div>
+        )}
+      </div>
+
 
         <div className="input-section">
           <input

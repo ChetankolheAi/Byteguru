@@ -470,5 +470,5 @@
 .midSection{
   display: flex;
   flex-direction: row;
-  max-width: 1000px;
+  width: 100%;
 }

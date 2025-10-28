@@ -36,11 +36,14 @@ import GraphVisualizer from './Visualization/GraphVisualization/GraphVisualizer'
 
 
 import QuizGenerator from './QuizPages/Quizegenerator';
-import TestResult from './Loaders/TestResult'
+
+
+import ProfilePage from './ProfilePage/ProfilePage';
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userid, setuserid] = useState("");
   const [firstname, srtFirstname] = useState("");
+  const [email, setemail] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   useEffect(() => {
@@ -80,6 +83,7 @@ function App() {
       if (data.success) {
         setuserid(data.user._id);
         srtFirstname(data.user.firstname);
+        setemail(data.user.email);
         setIsAuthenticated(true);
       }
     } catch (err) {
@@ -132,7 +136,9 @@ function App() {
 
           <Route path="/GraphVisualizer" element={<GraphVisualizer />} />
 
-          <Route path="/QuizGenerator" element={<QuizGenerator />} />
+          <Route path="/QuizGenerator" element={<QuizGenerator userid={userid} />} />
+         
+         <Route path="/Profile" element={<ProfilePage userid={userid} firstname={firstname} email={email} isAuthenticated={isAuthenticated}/>} />
         </Routes>
       </div>
     </Router>

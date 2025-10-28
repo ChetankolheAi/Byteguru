@@ -25,7 +25,7 @@ app.post("/api/gemini", async (req, res) => {
 
   try {
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         contents: [
           {
@@ -48,8 +48,17 @@ app.post("/api/gemini", async (req, res) => {
 });
 
 
+
+
+
 app.use('/api', taskRoutes);
 
+
+
+
+
+
+//Test Generator
 const questions = {
   beginner: [
     "Write a program to find the largest of two numbers.",
@@ -80,7 +89,6 @@ const questions = {
   ]
 };
 
-// route to get 5 random questions by level
 app.get("/api/questions/:level", (req, res) => {
   const { level } = req.params;
   const levelQuestions = questions[level];
@@ -89,7 +97,7 @@ app.get("/api/questions/:level", (req, res) => {
     return res.status(400).json({ error: "Invalid level" });
   }
 
-  // pick 5 random
+  
   const randomQs = levelQuestions.sort(() => 0.5 - Math.random()).slice(0, 5);
   res.json({ level, questions: randomQs });
 });

@@ -66,14 +66,47 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0;
+
+cursor: pointer;
+}
+
+
+.final-submit-button {
+  margin-top: 25px;
+  padding: 12px 24px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pop 1.5s infinite ease-in-out;
+  cursor: pointer;
+
+}
+@keyframes pop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .Level-Selector button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
+.gen-btn1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 
-ul {
+/* ul {
   list-style: decimal inside;
   text-align: left;
   max-width: 700px;
@@ -94,7 +127,7 @@ ul li {
 ul li:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+} */
 
 /* Loader Centering */
 .AILoader {
@@ -108,15 +141,7 @@ ul li:hover {
   color: #222;
 }
 }
-.question-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 800px;
-  text-align: left;
-}
+
 
 .button-group {
   margin-top: 20px;
@@ -153,18 +178,6 @@ ul li:hover {
   overflow-x: auto;
 }
 
-.final-submit-button {
-  margin-top: 25px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #22c55e, #15803d);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
 
 .final-submit-button:hover {
   transform: scale(1.05);
@@ -284,6 +297,7 @@ ul li:hover {
   border-radius: 6px;
   border-left: 5px solid #28a745;
 }
+
 .question-box {
   background: #1e1e1e;
   color: #fff;
@@ -293,7 +307,13 @@ ul li:hover {
   margin-top: 0;
   height: max-content;
   overflow-y: auto;
-  min-width: 300px;
+  width: 400;
+  max-width: 400px;
+  padding: 0 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: left;
 }
 
 .question-box p {

@@ -204,13 +204,31 @@
   margin-top: 60px;
   border: 1px solid #7055ff;
 } */
+.test-image {
+  width: 400px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test-image svg {
+  width: 300px;
+  height: 300px;
+  color: var(--theme-color-dark, #6c63ff); /* use theme variable */
+  transition: color 0.3s ease;
+}
 
 .title-text {
   font-size: 22px;
   font-weight: bold;
   color: #000000;
 }
+.icon{
+  fill: currentColor;
+      color: var(--theme-color);
 
+}
 .ai-btn {
   background: #a14cff;
   border: none;
@@ -810,7 +828,7 @@ max-width: 1000px;
   margin-bottom: 20px;
 }
 
-.test-image img {
+.test-image svg {
   width: 200px;
   max-width: 400px;
 }

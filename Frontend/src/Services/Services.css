@@ -1,5 +1,5 @@
 .services-container {
-  text-align: center;
+  text-align: left;
   background-color: #f5f5f5;
   min-height: 100vh;
   display: flex;
@@ -27,7 +27,7 @@
   display: grid;
  grid-template-columns: repeat(3, 1fr);
    gap: 30px;
-  justify-items: center;
+  justify-items: left;
   max-width: 1000px;
 
 }
@@ -42,6 +42,10 @@
   font-family: "Outfit", sans-serif;
   font-weight: 500;
   transition: 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .service-card:hover {
@@ -73,6 +77,8 @@
 .service-card button:hover {
   background-color: #45a049;
 }
+.service-icon{
+color: var(--theme-color-dark, #6c63ff); }
 @media(max-width:1000px) {
     .services-grid {
       gap: 20px;

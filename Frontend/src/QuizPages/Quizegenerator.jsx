@@ -6,7 +6,7 @@ import "./Quizegenerator.css";
 import { API_URL } from "../utils";
 import Editor from "@monaco-editor/react";
 
-function QuizGenerator() {
+function QuizGenerator({userid}) {
   const [level, setLevel] = useState("beginner");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -72,6 +72,7 @@ function QuizGenerator() {
 
   // Submit the entire test
   const handleFinalSubmit = async () => {
+    let finalScore = 0;
     setLoading(true);
 
     try {
@@ -101,7 +102,7 @@ ${questions.map(
       }
 
       // Use backend response score or fallback to local score
-      const finalScore =
+      finalScore =
         parsed?.correctCount !== undefined ? parsed.correctCount : score;
 
       setScore(finalScore);
@@ -114,6 +115,21 @@ ${questions.map(
         setLoading(false);
       }, 8500);
     }
+
+  const result = finalScore; // must be a number (0–5)
+
+  try {
+    const res = await fetch("http://localhost:5000/api/addTestScore", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userid, result }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
   };
 
   // const currentQuestion = questions[currentIndex];
@@ -143,6 +159,11 @@ ${questions.map(
               />
             )}
           </button>
+          {currentIndex === questions.length - 1 && (
+            <button onClick={handleFinalSubmit} className="final-submit-button" >
+              🚀 Submit Full Test
+            </button>
+          )}
         </div>
       </div>
 
@@ -198,11 +219,7 @@ ${questions.map(
               Next ➡
             </button>
           </div>
-          {currentIndex === questions.length - 1 && (
-            <button onClick={handleFinalSubmit} className="final-submit-button" >
-              🚀 Submit Full Test
-            </button>
-          )}
+          
 </div>
 
 
