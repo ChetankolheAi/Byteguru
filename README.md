@@ -1,4 +1,4 @@
-# ![ByteGuru Logo](path-to-logo.png) ByteGuru AI
+# ![ByteGuru Logo](icon.webp) ByteGuru 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![React](https://img.shields.io/badge/React-17.0.2-blue)](https://reactjs.org/)  
