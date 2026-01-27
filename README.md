@@ -25,7 +25,9 @@
 ## **📸 Screenshots**
 
 **Landing Page**  
-![Landing Page](images/landing.png)
+## Landing Page
+<img src="images/landing.png" alt="Landing Page" width="600" />
+
 
 ---
 
