@@ -31,7 +31,7 @@
 
 ## **💻 Demo**
 
-Check the live demo here: [Byteguru](https://XrayAi.netlify.app)  
+Check the live demo here: [Byteguru](https://byteguru10.netlify.app)  
 
 ---
 
