@@ -1,4 +1,8 @@
-# ![ByteGuru Logo](images/icon.webp) ByteGuru 
+<h1 align="center">
+  <img src="images/icon.webp" alt="ByteGuru Logo" width="40" />
+  ByteGuru
+</h1>
+ 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![React](https://img.shields.io/badge/React-17.0.2-blue)](https://reactjs.org/)  
@@ -26,7 +30,7 @@
 
 **Landing Page**  
 ## Landing Page
-<img src="images/landing.png" alt="Landing Page" width="600" />
+<img src="images/landing.png" alt="Landing Page" width="1000" />
 
 
 ---
