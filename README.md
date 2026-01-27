@@ -1,4 +1,4 @@
-# ![ByteGuru Logo](icon.webp) ByteGuru 
+# ![ByteGuru Logo](images/icon.webp) ByteGuru 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![React](https://img.shields.io/badge/React-17.0.2-blue)](https://reactjs.org/)  
@@ -25,7 +25,7 @@
 ## **📸 Screenshots**
 
 **Landing Page**  
-![Landing Page](assets/landing.png)
+![Landing Page](images/Screenshot 2026-01-27 185802.png)
 
 ---
 
