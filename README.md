@@ -7,9 +7,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![React](https://img.shields.io/badge/React-17.0.2-blue)](https://reactjs.org/)  
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-green)](https://nodejs.org/)  
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/byteguru)](https://github.com/yourusername/byteguru/issues)  
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/byteguru)](https://github.com/yourusername/byteguru/stargazers)  
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/byteguru)](https://github.com/yourusername/byteguru/network)
+[![GitHub issues](https://img.shields.io/github/issues/ChetankolheAi/byteguru)](https://github.com/ChetankolheAi/byteguru/issues)  
+[![GitHub stars](https://img.shields.io/github/stars/ChetankolheAi/byteguru)](https://github.com/ChetankolheAi/byteguru/stargazers)  
+[![GitHub forks](https://img.shields.io/github/forks/ChetankolheAi/byteguru)](https://github.com/ChetankolheAi/byteguru/network)
 
 **ByteGuru AI** is an AI-powered coding assistant platform designed for developers and learners. Get instant AI help with code, track your history, and test your code in a clean, responsive interface.  
 
