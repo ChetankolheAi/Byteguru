@@ -25,7 +25,7 @@
 ## **📸 Screenshots**
 
 **Landing Page**  
-![Landing Page](images/Screenshot 2026-01-27 185802.png)
+![Landing Page](images/landing.png)
 
 ---
 
