@@ -265,6 +265,58 @@ console.log("Received Params:", req.params); // ✅ shows userid
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+const TestScoreCalculator = async (req, res) => {
+  const { prompt } = req.body;
+  console.log("Code received:", prompt);
+
+  if (!prompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+
+  try {
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: 
+                    `${prompt}`
+              },
+            ],
+          },
+        ],
+      }
+    );
+
+    let geminiText =
+      response.data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+
+    // Trim whitespace
+    geminiText = geminiText.trim();
+
+    let analysis;
+    try {
+      // Remove markdown ```json ``` block if present
+      const match = geminiText.match(/```json\s*([\s\S]*?)\s*```/i);
+      if (match && match[1]) {
+        analysis = JSON.parse(match[1]);
+      } else {
+        analysis = JSON.parse(geminiText);
+      }
+    } catch (err) {
+      console.error("JSON parse error:", err.message);
+      analysis = { error: "Failed to parse Gemini response", raw: geminiText };
+    }
+
+    res.status(200).json({ response: analysis });
+  } catch (err) {
+    console.error("Gemini API error:", err.message);
+    res.status(503).json({ error: "Gemini service unavailable" });
+  }
+};
 
 
-export {signup , Login , SaveHistory,GetHistory ,verify ,CodeAnalyser , SaveTestScore , RetriveTestScore}
+export {signup , Login , SaveHistory,GetHistory ,verify ,CodeAnalyser , SaveTestScore , RetriveTestScore ,TestScoreCalculator}

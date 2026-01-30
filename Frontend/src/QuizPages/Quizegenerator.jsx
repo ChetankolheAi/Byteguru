@@ -87,7 +87,7 @@ ${questions.map(
       )}
 `;
 
-      const res = await fetch(`${API_URL}/api/CodeAnalyser`, {
+      const res = await fetch(`${API_URL}/api/TestScoreCalculator`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
