@@ -176,4 +176,4 @@ const GeminiAPI = async(req,res)=>{
 
 
 
-export {SaveHistory,GetHistory ,CodeAnalyser , SaveTestScore , RetriveTestScore ,TestScoreCalculator,GeminiAPI,TestGenerator}
+export {SaveHistory,GetHistory ,CodeAnalyser ,GeminiAPI}
