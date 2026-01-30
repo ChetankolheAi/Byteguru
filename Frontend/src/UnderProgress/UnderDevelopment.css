@@ -1,0 +1,56 @@
+.under-dev-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image:
+    linear-gradient(#eaeaea 1px, transparent 1px),
+    linear-gradient(90deg, #eaeaea 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.under-dev-card {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 420px;
+  animation: floatUp 0.8s ease-out;
+}
+
+.under-dev-card h2 {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.under-dev-card p {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.under-dev-card span {
+  display: inline-block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: var(--theme-color);
+  font-family: "Macondo", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Subtle animation */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

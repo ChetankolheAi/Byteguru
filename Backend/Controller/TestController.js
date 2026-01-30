@@ -1,3 +1,5 @@
+import {TestScore_Details} from '../Model/model.js'; 
+import axios from 'axios';
 
 //Test Generator
 const questions = {

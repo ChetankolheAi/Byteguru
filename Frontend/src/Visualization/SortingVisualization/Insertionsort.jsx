@@ -110,7 +110,9 @@ const handleGeminiCall = async () => {
     }
   };
 
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <div className="visualizer">
       <h2>Insertion Sorting Visualizer</h2>

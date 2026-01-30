@@ -62,7 +62,9 @@ const fetchScores = async () => {
     about:
       "I am 'YourName', a passionate MERN stack developer and learner focused on AI-driven web apps.('you can change this')",
   };
-
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <>
     <div className="profile-wrapper">

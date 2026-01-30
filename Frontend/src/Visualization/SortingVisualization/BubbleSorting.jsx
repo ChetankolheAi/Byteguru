@@ -96,7 +96,9 @@ const BubbleSorting = () => {
       setLoading(false); // ✅ stop loading always
     }
   };
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <div className="visualizer">
       <h2>Bubble Sorting Visualizer</h2>

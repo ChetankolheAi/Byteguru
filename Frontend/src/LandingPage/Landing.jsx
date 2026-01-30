@@ -332,7 +332,7 @@ m-1740 -141 c165 -27 267 -129 245 -246 -9 -52 -85 -125 -161 -154 -83 -32
                 </h1>
                 <p>“Instant insights, powered by intelligence , Ask Anything (Chatbot)</p>
             </div>
-            <Link to='/Chatbot'>
+            <Link to='/GeminiUnavailable'>
                 <button className="btn primary">
                     Ask Me  <i className="fa-solid fa-arrow-right"></i>
                 </button>

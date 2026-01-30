@@ -33,7 +33,9 @@ const TreeHeightVisualizer = () => {
   }, []);
 
 
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   // Build tree from array
   const buildTree = (arr) => {

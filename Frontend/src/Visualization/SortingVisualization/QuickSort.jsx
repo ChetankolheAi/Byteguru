@@ -118,6 +118,9 @@ const handleGeminiCall = async () => {
       notify('Gemini API error: Server Not Responding');
     }
   };
+    useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <div className="visualizer">
       <h2>Quick Sort Visualizer</h2>

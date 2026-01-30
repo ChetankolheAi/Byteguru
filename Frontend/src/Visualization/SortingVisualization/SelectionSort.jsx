@@ -109,7 +109,9 @@ const SelectionSort = () => {
       setLoading(false); // ✅ stop loading always
     }
   };
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <div className="visualizer">
       <h2>Selection Sorting Visualizer</h2>

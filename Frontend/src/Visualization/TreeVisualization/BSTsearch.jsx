@@ -9,30 +9,38 @@ class TreeNode {
   }
 }
 
-const TreeTraversalVisualizer = () => {
+const BSTsearch= () => {
   const [root, setRoot] = useState(null);
   const [userInput, setUserInput] = useState("");
+  const [target, setTarget] = useState("");
   const [highlightNode, setHighlightNode] = useState(null);
-  const [traversalOrder, setTraversalOrder] = useState([]);
-  const [traversal, setTraversalType] = useState("");
+  const [result, setResult] = useState("");
   const [speed, setSpeed] = useState(300);
   const speedRef = useRef(speed);
 
+
+
+    useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   useEffect(() => {
     speedRef.current = speed;
   }, [speed]);
 
-  // Default tree
+
+
+  // Default BST
   useEffect(() => {
-    const defaultArr = [1, 2, 3, 4, 5, null, 7];
+    const defaultArr = [8, 3, 10, 1, 6, null, 14, null, null, 4, 7, 13];
     setRoot(buildTree(defaultArr));
   }, []);
 
-  // Build tree (level order)
+
+
+  // Build BST from level-order input
   const buildTree = (arr) => {
     if (!arr.length) return null;
-    const nodes = arr.map((val) => (val !== null ? new TreeNode(val) : null));
-    let root = nodes[0];
+    const nodes = arr.map((v) => (v !== null ? new TreeNode(v) : null));
     let j = 1;
     for (let i = 0; i < nodes.length && j < nodes.length; i++) {
       if (nodes[i]) {
@@ -40,81 +48,53 @@ const TreeTraversalVisualizer = () => {
         nodes[i].right = nodes[j++] || null;
       }
     }
-    return root;
+    return nodes[0];
   };
 
   const handleSetTree = () => {
     if (!userInput.trim()) return;
+
     const arr = userInput
       .split(",")
       .map((v) => (v.trim() === "null" ? null : parseInt(v.trim())));
-     if (window.innerWidth < 700 && arr.length > 15) {
-        alert("Maximum 15 nodes allowed on Medium screens!");
-        return;
-    }
-    else if (window.innerWidth < 500 && arr.length > 7) {
-        alert("Maximum 7 nodes allowed on small screens!");
-        return;
-    }
+
     setRoot(buildTree(arr));
-    setTraversalOrder([]);
+    setResult("");
     setHighlightNode(null);
   };
 
-  // Traversals
-  const inorder = async (node, result = []) => {
-    if (!node) return;
-    await inorder(node.left, result);
+  //BST Search with animation
+  const searchBST = async (node, value) => {
+    if (!node) return false;
+
     setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-    await inorder(node.right, result);
+    await new Promise((r) =>
+      setTimeout(r, 1150 - speedRef.current)
+    );
+
+    if (node.val === value) return true;
+
+    if (value < node.val) return await searchBST(node.left, value);
+    return await searchBST(node.right, value);
   };
 
-  const preorder = async (node, result = []) => {
-    if (!node) return;
-    setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-    await preorder(node.left, result);
-    await preorder(node.right, result);
-  };
+  const handleSearch = async () => {
+    if (!root || target === "") return;
 
-  const postorder = async (node, result = []) => {
-    if (!node) return;
-    await postorder(node.left, result);
-    await postorder(node.right, result);
-    setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-  };
-
-  const handleTraversal = async (type) => {
-    if (!root) return;
-    setTraversalOrder([]);
+    setResult("");
     setHighlightNode(null);
 
-    if (type === "inorder"){
-
-        await inorder(root);
-        setTraversalType("Inorder");
-    }   
-    else if (type === "preorder"){
-        await preorder(root);
-        setTraversalType("Preorder");
-    } 
-    else if (type === "postorder"){
-        await postorder(root);
-        setTraversalType("Postorder");
-    } 
+    const found = await searchBST(root, parseInt(target));
 
     setHighlightNode(null);
+    setResult(
+      found
+        ? `✅ Value ${target} found in BST`
+        : `❌ Value ${target} not found`
+    );
   };
 
-  // Render tree recursively
+  // Render tree
   const renderTree = (node) => {
     if (!node) return null;
     return (
@@ -135,15 +115,13 @@ const TreeTraversalVisualizer = () => {
       </div>
     );
   };
-  useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
+
   return (
     <div className="visualizer">
-      <h2>Binary Tree Traversal Visualizer</h2>
+      <h2>BST Search Visualizer</h2>
 
       <div className="tree-container">{renderTree(root)}</div>
-      
+
       <section className="info">
         <div className="info-section">
           <div className="sec1">
@@ -151,16 +129,17 @@ const TreeTraversalVisualizer = () => {
               className="bar-container barinfo"
               style={{ background: "#ff5252" }}
             ></div>
-            <label>Current Node Traversal</label>
+            <label>Current Search Node</label>
           </div>
         </div>
       </section>
-      {traversalOrder.length > 0 && (
+
+      {result && (
         <div className="result">
-          <h3>{traversal} Traversal:</h3>
-          <p>{traversalOrder.join(" → ")}</p>
+          <h3>{result}</h3>
         </div>
       )}
+
       <div className="bottom-btn">
         <div className="buttons-sort">
           <div className="slider-control" style={{ "--value": speed }}>
@@ -176,27 +155,33 @@ const TreeTraversalVisualizer = () => {
           </div>
 
           <div className="input-array">
-            <label>Enter tree nodes (comma separated): </label>
+            <label>Enter BST (level order):</label>
             <input
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              placeholder="e.g. 1,2,3,4,5,null,7"
+              placeholder="8,3,10,1,6,null,14,null,null,4,7,13"
             />
             <button onClick={handleSetTree}>Set Tree</button>
           </div>
 
+          <div className="input-array">
+            <label>Search Value:</label>
+            <input
+              type="number"
+              value={target}
+              onChange={(e) => setTarget(e.target.value)}
+              placeholder="6"
+            />
+          </div>
+
           <div className="inner-btn">
-            <button onClick={() => handleTraversal("inorder")}>Inorder</button>
-            <button onClick={() => handleTraversal("preorder")}>Preorder</button>
-            <button onClick={() => handleTraversal("postorder")}>Postorder</button>
+            <button onClick={handleSearch}>Search</button>
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 };
 
-export default TreeTraversalVisualizer;
+export default BSTsearch;

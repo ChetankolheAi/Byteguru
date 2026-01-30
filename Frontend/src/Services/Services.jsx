@@ -179,7 +179,7 @@ c32 -19 89 -43 127 -53 l69 -17 0 -43 0 -43 80 0 80 0 0 43 0 44 56 12 c32 7
   { 
     title: "Chatbot", 
     description: "Interact with our AI chatbot in real-time.", 
-    path: "/Chatbot",
+    path: "/GeminiUnavailable",
      svg: (
      <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +258,8 @@ m-1740 -141 c165 -27 267 -129 245 -246 -9 -52 -85 -125 -161 -154 -83 -32
   { 
     title: "Code Analyzer", 
     description: "Analyze your code for errors and efficiency.", 
-    path: "/code-analyzer" ,
+    // path: "/code-analyzer" ,
+    path: "/GeminiUnavailable" ,
      svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

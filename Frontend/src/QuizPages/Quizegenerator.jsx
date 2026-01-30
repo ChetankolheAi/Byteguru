@@ -17,7 +17,9 @@ function QuizGenerator({userid}) {
   const [testSubmitted, setTestSubmitted] = useState(false);
   const [score, setScore] = useState(0);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -134,7 +136,7 @@ ${questions.map(
 
   // const currentQuestion = questions[currentIndex];
   const currentCode = answers[currentIndex] || "// Write your code here";
-
+  
   return (
     <div className="head-container">
       <h2>🧠 Coding Test Generator</h2>

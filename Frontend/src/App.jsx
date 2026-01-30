@@ -26,11 +26,29 @@ import InsertionSort from './Visualization/SortingVisualization/Insertionsort';
 import MergeSort from './Visualization/SortingVisualization/MergeSort';
 import SelectionSort from './Visualization/SortingVisualization/SelectionSort';
 import QuickSort from './Visualization/SortingVisualization/QuickSort';
+import HeapSort from './Visualization/SortingVisualization/HeapSort';
+import CountingSort from './Visualization/SortingVisualization/CountingSort';
+import RadixSort from './Visualization/SortingVisualization/RadixSort';
+import ShellSort from './Visualization/SortingVisualization/ShellSort';
+
+
+//Searching
+import LinearSearch from './Visualization/SearchingVisualization/LinearSearch';
+import BinarySearch from './Visualization/SearchingVisualization/BinarySearch';
+import JumpSearch from './Visualization/SearchingVisualization/JumpSearch';
+import LCAVisualizer from './Visualization/TreeVisualization/LCAVisualizer';
+
 
 //Tree
 import TreeHeightVisualizer from './Visualization/TreeVisualization/TreeHeightDiameterVisualizer';
 import TreeTraversalVisualizer from './Visualization/TreeVisualization/TreeTraversalVisualizer ';
+import BalancedTree from './Visualization/TreeVisualization/BalancedTree';
+import BSTsearch from './Visualization/TreeVisualization/BSTsearch';
+import LevelOrderTraversalVisualizer from './Visualization/TreeVisualization/LevelOrderTraversalVisualizer';
 
+
+import UnderDevelopment from './UnderProgress/UnderDevelopment'
+import GeminiUnavailable from './UnderProgress/GeminiUnavailable'
 //Graph
 import GraphVisualizer from './Visualization/GraphVisualization/GraphVisualizer';
 
@@ -95,7 +113,9 @@ function App() {
 
   return () => window.removeEventListener("storage", fetchUser);
 }, []);
-
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <Router>
       <SideBar isOpen={isSidebarOpen} 
@@ -130,11 +150,27 @@ function App() {
           <Route path="/MergeSort" element={<MergeSort />} />
           <Route path="/SelectionSort" element={<SelectionSort />} />
           <Route path="/QuickSort" element={<QuickSort />} />
+          <Route path="/HeapSort" element={<HeapSort />} />
+          <Route path="/CountingSort" element={<CountingSort />} />
+          <Route path="/RadixSort" element={<RadixSort />} />
+          <Route path="/ShellSort" element={<ShellSort />} />
       
+          <Route path="/LinearSearch" element={<LinearSearch />} />
+          <Route path="/BinarySearch" element={<BinarySearch />} />
+          <Route path="/JumpSearch" element={<JumpSearch />} />
+
           <Route path="/TreeHeightVisualizer" element={<TreeHeightVisualizer />} />
           <Route path="/TreeTraversalVisualizer" element={<TreeTraversalVisualizer />} />
+          <Route path="/BalancedTree" element={<BalancedTree />} />
+          <Route path="/BSTsearch" element={<BSTsearch />} />
+          <Route path="/LCAVisualizer" element={<LCAVisualizer />} />
+          <Route path="/LevelOrderTraversalVisualizer" element={<LevelOrderTraversalVisualizer />} />
 
           <Route path="/GraphVisualizer" element={<GraphVisualizer />} />
+
+
+          <Route path="/UnderDevelopment" element={<UnderDevelopment />} />
+          <Route path="/GeminiUnavailable" element={<GeminiUnavailable />} />
 
           <Route path="/QuizGenerator" element={<QuizGenerator userid={userid} />} />
          

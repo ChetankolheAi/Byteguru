@@ -15,6 +15,9 @@ const COMPANY_INFO = {
   tagline: "Smart Instant insights, powered by intelligence",
   copyrightYear: new Date().getFullYear(),
 };
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <>
     <div className="Aboutus">

@@ -9,12 +9,13 @@ class TreeNode {
   }
 }
 
-const TreeTraversalVisualizer = () => {
+const LCAVisualizer = () => {
   const [root, setRoot] = useState(null);
   const [userInput, setUserInput] = useState("");
+  const [nodeA, setNodeA] = useState("");
+  const [nodeB, setNodeB] = useState("");
   const [highlightNode, setHighlightNode] = useState(null);
-  const [traversalOrder, setTraversalOrder] = useState([]);
-  const [traversal, setTraversalType] = useState("");
+  const [result, setResult] = useState("");
   const [speed, setSpeed] = useState(300);
   const speedRef = useRef(speed);
 
@@ -22,17 +23,16 @@ const TreeTraversalVisualizer = () => {
     speedRef.current = speed;
   }, [speed]);
 
-  // Default tree
+  // Default Tree
   useEffect(() => {
-    const defaultArr = [1, 2, 3, 4, 5, null, 7];
+    const defaultArr = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4];
     setRoot(buildTree(defaultArr));
   }, []);
 
-  // Build tree (level order)
+  // Build Tree (level order)
   const buildTree = (arr) => {
     if (!arr.length) return null;
-    const nodes = arr.map((val) => (val !== null ? new TreeNode(val) : null));
-    let root = nodes[0];
+    const nodes = arr.map((v) => (v !== null ? new TreeNode(v) : null));
     let j = 1;
     for (let i = 0; i < nodes.length && j < nodes.length; i++) {
       if (nodes[i]) {
@@ -40,81 +40,61 @@ const TreeTraversalVisualizer = () => {
         nodes[i].right = nodes[j++] || null;
       }
     }
-    return root;
+    return nodes[0];
   };
 
   const handleSetTree = () => {
     if (!userInput.trim()) return;
+
     const arr = userInput
       .split(",")
       .map((v) => (v.trim() === "null" ? null : parseInt(v.trim())));
-     if (window.innerWidth < 700 && arr.length > 15) {
-        alert("Maximum 15 nodes allowed on Medium screens!");
-        return;
-    }
-    else if (window.innerWidth < 500 && arr.length > 7) {
-        alert("Maximum 7 nodes allowed on small screens!");
-        return;
-    }
+
     setRoot(buildTree(arr));
-    setTraversalOrder([]);
+    setResult("");
     setHighlightNode(null);
   };
 
-  // Traversals
-  const inorder = async (node, result = []) => {
-    if (!node) return;
-    await inorder(node.left, result);
+  // 🔥 LCA Logic with animation (Binary Tree)
+  const findLCA = async (node, p, q) => {
+    if (!node) return null;
+
     setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-    await inorder(node.right, result);
+    await new Promise((r) =>
+      setTimeout(r, 1150 - speedRef.current)
+    );
+
+    if (node.val === p || node.val === q) return node;
+
+    const left = await findLCA(node.left, p, q);
+    const right = await findLCA(node.right, p, q);
+
+    if (left && right) return node;
+
+    return left ? left : right;
   };
 
-  const preorder = async (node, result = []) => {
-    if (!node) return;
-    setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-    await preorder(node.left, result);
-    await preorder(node.right, result);
-  };
+  const handleFindLCA = async () => {
+    if (!root || nodeA === "" || nodeB === "") return;
 
-  const postorder = async (node, result = []) => {
-    if (!node) return;
-    await postorder(node.left, result);
-    await postorder(node.right, result);
-    setHighlightNode(node.val);
-    result.push(node.val);
-    setTraversalOrder([...result]);
-    await new Promise((r) => setTimeout(r, 1150-speedRef.current));
-  };
-
-  const handleTraversal = async (type) => {
-    if (!root) return;
-    setTraversalOrder([]);
+    setResult("");
     setHighlightNode(null);
 
-    if (type === "inorder"){
-
-        await inorder(root);
-        setTraversalType("Inorder");
-    }   
-    else if (type === "preorder"){
-        await preorder(root);
-        setTraversalType("Preorder");
-    } 
-    else if (type === "postorder"){
-        await postorder(root);
-        setTraversalType("Postorder");
-    } 
+    const lca = await findLCA(
+      root,
+      parseInt(nodeA),
+      parseInt(nodeB)
+    );
 
     setHighlightNode(null);
+    setResult(
+      lca
+        ? `✅ LCA is Node ${lca.val}`
+        : "❌ LCA not found"
+    );
   };
 
-  // Render tree recursively
+  // Render Tree
   const renderTree = (node) => {
     if (!node) return null;
     return (
@@ -140,10 +120,10 @@ const TreeTraversalVisualizer = () => {
 }, []);
   return (
     <div className="visualizer">
-      <h2>Binary Tree Traversal Visualizer</h2>
+      <h2>Lowest Common Ancestor Visualizer</h2>
 
       <div className="tree-container">{renderTree(root)}</div>
-      
+
       <section className="info">
         <div className="info-section">
           <div className="sec1">
@@ -151,16 +131,17 @@ const TreeTraversalVisualizer = () => {
               className="bar-container barinfo"
               style={{ background: "#ff5252" }}
             ></div>
-            <label>Current Node Traversal</label>
+            <label>Current Node Check</label>
           </div>
         </div>
       </section>
-      {traversalOrder.length > 0 && (
+
+      {result && (
         <div className="result">
-          <h3>{traversal} Traversal:</h3>
-          <p>{traversalOrder.join(" → ")}</p>
+          <h3>{result}</h3>
         </div>
       )}
+
       <div className="bottom-btn">
         <div className="buttons-sort">
           <div className="slider-control" style={{ "--value": speed }}>
@@ -176,27 +157,45 @@ const TreeTraversalVisualizer = () => {
           </div>
 
           <div className="input-array">
-            <label>Enter tree nodes (comma separated): </label>
+            <label>Enter Tree (level order):</label>
             <input
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              placeholder="e.g. 1,2,3,4,5,null,7"
+              placeholder="3,5,1,6,2,0,8,null,null,7,4"
             />
             <button onClick={handleSetTree}>Set Tree</button>
           </div>
 
+          <div className="input-array">
+            <label>Node A:</label>
+            <input
+              type="number"
+              value={nodeA}
+              onChange={(e) => setNodeA(e.target.value)}
+              placeholder="5"
+            />
+          </div>
+
+          <div className="input-array">
+            <label>Node B:</label>
+            <input
+              type="number"
+              value={nodeB}
+              onChange={(e) => setNodeB(e.target.value)}
+              placeholder="1"
+            />
+          </div>
+
           <div className="inner-btn">
-            <button onClick={() => handleTraversal("inorder")}>Inorder</button>
-            <button onClick={() => handleTraversal("preorder")}>Preorder</button>
-            <button onClick={() => handleTraversal("postorder")}>Postorder</button>
+            <button onClick={handleFindLCA}>
+              Find LCA
+            </button>
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 };
 
-export default TreeTraversalVisualizer;
+export default LCAVisualizer;
