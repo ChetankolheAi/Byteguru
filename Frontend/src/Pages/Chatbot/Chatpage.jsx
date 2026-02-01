@@ -34,75 +34,43 @@ function Chatpage({userid,firstname}) {
 
 
   const handleGeminiCall = async () => {
-  if (!userInput.trim()) return;
+  if (!userInput.trim() || loading) return;
 
   setLoading(true);
 
-  // Add user message first
   const userMessage = { sender: 'user', text: userInput };
-  setChatHistory((prev) => [...prev, userMessage]);
+  const updatedHistory = [...chatHistory, userMessage];
+  setChatHistory(updatedHistory);
 
   try {
-    // 1️⃣ Call Gemini API
     const res = await fetch(`${API_URL}/api/gemini`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        prompt: userInput,
-        chatHistory: [...chatHistory, userMessage], // include latest message
+        prompt: userInput
       }),
     });
 
     const data = await res.json();
-    if (res.status === 400) {
-      notify(data.error || 'Bad request');
-      setLoading(false);
-      return;
-    }
-    else if(res.status === 503){
-      notify(data.error || 'Bad request');
+
+    if (res.status === 429) {
+      notify("Too many requests. Please wait.");
       setLoading(false);
       return;
     }
 
-    const markdown = data.response || '';
-    const html = marked.parse(markdown);
-
-    // 2️⃣ Save chat history in backend
-    if(userid){
-      try {
-        const HistoryData = {
-          userid: userid,
-          history: [...chatHistory, userMessage, { sender: 'bot', text: html }],
-          date:formattedDate
-        };
-  
-        const historyRes = await fetch(`${API_URL}/api/History`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(HistoryData),
-        });
-  
-        const historyResult = await historyRes.json();
-        console.log('History save result:', historyResult);
-      } catch (err) {
-        console.error('Error saving history:', err);
-      }
+    if (!res.ok) {
+      notify(data.error || "Gemini error");
+      setLoading(false);
+      return;
     }
 
-    // 3️⃣ Add bot message to UI
-    if (html) {
-      const botMessage = { sender: 'bot', text: html };
-      setChatHistory((prev) => [...prev, botMessage]);
-    }
+    const html = marked.parse(data.response || '');
+    setChatHistory((prev) => [...prev, { sender: 'bot', text: html }]);
 
   } catch (err) {
-    console.error('Gemini API error:', err);
-    notify('Gemini API error:- Server Not Responding');
-    setChatHistory((prev) => [
-      ...prev,
-      { sender: 'bot', text: 'Error connecting to Gemini API' },
-    ]);
+    notify("Server not responding");
+    console.log(err)
   }
 
   setLoading(false);

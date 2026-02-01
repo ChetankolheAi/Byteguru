@@ -1,6 +1,8 @@
 import {TestScore_Details} from '../Model/model.js'; 
 import axios from 'axios';
-
+import dotenv from "dotenv";
+dotenv.config();
+const GEMINI_API_KEY = process.env.GEMINI_API__KEY;
 //Test Generator
 const questions = {
   beginner: [
@@ -59,7 +61,7 @@ const TestScoreCalculator = async (req, res) => {
 
   try {
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         contents: [
           {

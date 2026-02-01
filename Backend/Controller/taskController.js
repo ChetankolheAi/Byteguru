@@ -1,54 +1,54 @@
 import {Chatbothistory_Details , TestScore_Details} from '../Model/model.js'; 
 import axios from 'axios';
 
-
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
+import dotenv from "dotenv";
+dotenv.config();
+const GEMINI_API_KEY = process.env.GEMINI_API__KEY;
 
 const SaveHistory = async(req,res)=>{
-    try{
-        const userHistory = await Chatbothistory_Details.findOne({ userid: req.body.userid });
-        const date = req.body.date;
-        if(userHistory){
-
-            const isDatePresent  = userHistory.history.find(h => h.date === date);
-            
-            if(isDatePresent && isDatePresent.date==date){
-                isDatePresent.Datehistory.push(...req.body.history);
-                userHistory.markModified('history'); // Tell Mongoose nested field changed
-                await userHistory.save();
-            }
-            else{
-                userHistory.history.push({
-                    date: date,
-                    Datehistory: req.body.history
-                });
-            }
-
-            await userHistory.save();
-            return res.status(200).json({ success: true, message: "History Updated" });
-
-
-        }
-        else{
-            const userId= req.body.userid;
-            const history = req.body.history;
-            const newHistory ={
-                date:date,
-                Datehistory:history
-            }
-            const HistorySaver = new Chatbothistory_Details({
-                userid:userId,
-                history:newHistory,
+  try{
+    const userHistory = await Chatbothistory_Details.findOne({ userid: req.body.userid });
+    const date = req.body.date;
+    if(userHistory){
+      
+      const isDatePresent  = userHistory.history.find(h => h.date === date);
+      
+      if(isDatePresent && isDatePresent.date==date){
+        isDatePresent.Datehistory.push(...req.body.history);
+        userHistory.markModified('history'); // Tell Mongoose nested field changed
+        await userHistory.save();
+      }
+      else{
+        userHistory.history.push({
+          date: date,
+          Datehistory: req.body.history
+        });
+      }
+      
+      await userHistory.save();
+      return res.status(200).json({ success: true, message: "History Updated" });
+      
+      
+    }
+    else{
+      const userId= req.body.userid;
+      const history = req.body.history;
+      const newHistory ={
+        date:date,
+        Datehistory:history
+      }
+      const HistorySaver = new Chatbothistory_Details({
+        userid:userId,
+        history:newHistory,
             });
             await HistorySaver.save();
             return res.status(201).json({ success: true, message: "History Saved" });
+          }
+          
         }
-        
-    }
-    catch(err){
-        console.log(err);
-
+        catch(err){
+          console.log(err);
+          
     }
 }
 
@@ -56,11 +56,11 @@ const GetHistory = async (req, res) => {
 try {
   const { userid } = req.body; // since POST
   const userHistory = await Chatbothistory_Details.findOne({ userid });
-
+  
   if (!userHistory) {
     return res.json({ history: [] });
   }
-
+  
   // Send history array directly
   res.json({ history: userHistory.history });
 } catch (err) {
@@ -73,14 +73,14 @@ try {
 const CodeAnalyser = async (req, res) => {
   const { prompt } = req.body;
   console.log("Code received:", prompt);
-
+  
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });
   }
-
+  
   try {
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_APIKEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         contents: [
           {
@@ -88,12 +88,12 @@ const CodeAnalyser = async (req, res) => {
             parts: [
               {
                 text: `
-You are a code analyzer AI. Analyze the following code and return results in **valid JSON only**.
-
-Code:
-${prompt}
-
-Your JSON response must include:
+                You are a code analyzer AI. Analyze the following code and return results in **valid JSON only**.
+                
+                Code:
+                ${prompt}
+                
+                Your JSON response must include:
 {
   "language": "...",
   "topic": "...",
@@ -102,18 +102,18 @@ Your JSON response must include:
   "space_complexity": "...",
   "improvements": "...",
   "edge_cases": "..."
-}
-                `,
-              },
-            ],
-          },
-        ],
+  }
+  `,
+},
+],
+},
+],
       }
     );
-
+    
     let geminiText =
-      response.data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
-
+    response.data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    
     // Trim whitespace
     geminiText = geminiText.trim();
 
@@ -130,7 +130,7 @@ Your JSON response must include:
       console.error("JSON parse error:", err.message);
       analysis = { error: "Failed to parse Gemini response", raw: geminiText };
     }
-
+    
     res.status(200).json({ response: analysis });
   } catch (err) {
     console.error("Gemini API error:", err.message);
@@ -141,17 +141,18 @@ Your JSON response must include:
 
 
 const GeminiAPI = async(req,res)=>{
+  console.log(GEMINI_API_KEY,"Chetan")
   
   const { prompt } = req.body;
   console.log(req.body);
-
+  
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });
   }
-
+  
   try {
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         contents: [
           {
