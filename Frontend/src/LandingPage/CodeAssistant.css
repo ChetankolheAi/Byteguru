@@ -600,17 +600,21 @@ max-width: 1000px;
 
 .form-group label {
   font-weight: 600;
-  color: #333;
+  color: #380000;
   margin-bottom: 6px;
   display: block;
 }
 
+#name{
+  width: 95%;
+}
 .form-group input,
 .form-group textarea {
-  width: 90%;
+  width: 95%;
+
   padding: 12px 15px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #808080;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;

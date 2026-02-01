@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { API_URL, notify } from "../../utils.js";
-import { marked } from "marked";
+// import { marked } from "marked";
+import { callGemini } from "../geminiService.js";
 import "./Sorting1.css";
 
 const CountingSort = () => {
@@ -92,22 +93,12 @@ const CountingSort = () => {
       ", "
     )}]. Explain frequency counting and placement process.`;
 
-    try {
-      const res = await fetch(`${API_URL}/api/gemini`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      const html = marked.parse(data.response || "");
-      setBotMessage(html);
-    } catch (error) {
-      notify("Gemini API error");
-      console.log(error)
-    } finally {
-      setLoading(false);
-    }
+    callGemini({
+    prompt,
+    setLoading,
+    onSuccess: setBotMessage,
+    onError: notify,
+    });
   };
   useEffect(() => {
   window.scrollTo(0, 0);

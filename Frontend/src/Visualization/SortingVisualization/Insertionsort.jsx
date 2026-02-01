@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { API_URL, notify } from '../../utils.js';
-import { marked } from 'marked';
+import { callGemini } from "../geminiService.js";
 import Gemini from '../Gemini.png';
 
 import "./Sorting1.css";
@@ -85,29 +85,12 @@ const handleGeminiCall = async () => {
     setLoading(true);
     const prompt = `Explain step-by-step how insertion Sort works on this array: [${array.join(", ")}]. Include how comparisons and swaps happen in each pass.`;
 
-    try {
-      const res = await fetch(`${API_URL}/api/gemini`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      if (res.status === 400) {
-        notify(data.error || 'Bad request');
-        return;
-      }
-
-      const markdown = data.response || '';
-      const html = marked.parse(markdown);
-
-      if (html) setBotMessage(html); // ✅ Store explanation
-    } catch (err) {
-      console.error('Gemini API error:', err);
-      notify('Gemini API error: Server Not Responding');
-    }finally {
-      setLoading(false); // ✅ stop loading always
-    }
+    callGemini({
+        prompt,
+        setLoading,
+        onSuccess: setBotMessage,
+        onError: notify,
+        });
   };
 
   useEffect(() => {

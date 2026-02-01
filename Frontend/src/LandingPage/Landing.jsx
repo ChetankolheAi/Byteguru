@@ -3,14 +3,11 @@ import { Link } from 'react-router-dom';
 import "./CodeAssistant.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import BOT from './img/—Pngtree—3d robots_18121577.png'
 import Shutter from './img/shuttle.png'
 import Algorithm from './img/algorithm.png'
 import Chart from './img/chart.png'
 import Machine from './img/machine-learning.png'
-import Gears from './img/settings-gears.png'
 import Bar from './img/bot2.png'
-import Bot2 from './img/skill-development.png'
 import Footer from '../Footer/Footer'
 import { useNavigate } from "react-router-dom";
 
@@ -332,7 +329,7 @@ m-1740 -141 c165 -27 267 -129 245 -246 -9 -52 -85 -125 -161 -154 -83 -32
                 </h1>
                 <p>“Instant insights, powered by intelligence , Ask Anything (Chatbot)</p>
             </div>
-            <Link to='/GeminiUnavailable'>
+            <Link to='/Chatbot'>
                 <button className="btn primary">
                     Ask Me  <i className="fa-solid fa-arrow-right"></i>
                 </button>

@@ -3,7 +3,7 @@ import AILoader from "../Loaders/AILoader";
 import TestResult from '../Loaders/TestResult'
 
 import "./Quizegenerator.css";
-import { API_URL } from "../utils";
+import { API_URL ,notify} from "../utils";
 import Editor from "@monaco-editor/react";
 
 function QuizGenerator({userid}) {
@@ -17,6 +17,8 @@ function QuizGenerator({userid}) {
   const [testSubmitted, setTestSubmitted] = useState(false);
   const [score, setScore] = useState(0);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    const [isSubmited , setIsSubmited] = useState(false)
 useEffect(() => {
   window.scrollTo(0, 0);
 }, []);
@@ -40,7 +42,7 @@ useEffect(() => {
 
   // Generate 5 questions
   const handleGenerate = async () => {
-  
+  setIsSubmited(false)
     setCurrentIndex(0);
     setAnswers([]);
     setAnalyses([]);
@@ -60,7 +62,7 @@ useEffect(() => {
         setGenerating(false);
       
     }
-    }, 8000);
+    }, 1000);
   };
 
   //Update current question code
@@ -73,66 +75,94 @@ useEffect(() => {
  
 
   // Submit the entire test
-  const handleFinalSubmit = async () => {
-    let finalScore = 0;
-    setLoading(true);
-
-    try {
-      const prompt = `
-You are a code evaluator. 
-Here are ${answers.length} coding questions and their answers.
-Tell me how many are correct, and give me a JSON result like:
-{"correctCount": X, "total": ${answers.length}}
-
-${questions.map(
-        (q, i) => `Q${i + 1}: ${q}\nCode:\n${answers[i] || "No answer"}\n`
-      )}
-`;
-
-      const res = await fetch(`${API_URL}/api/TestScoreCalculator`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      let parsed = data.response;
-
-      if (typeof parsed === "string" && parsed.includes("```json")) {
-        const match = parsed.match(/```json\n([\s\S]*?)\n```/);
-        if (match && match[1]) parsed = JSON.parse(match[1]);
-      }
-
-      // Use backend response score or fallback to local score
-      finalScore =
-        parsed?.correctCount !== undefined ? parsed.correctCount : score;
-
-      setScore(finalScore);
-      setTestSubmitted(true);
-    } catch (err) {
-      console.error("Error submitting test:", err);
-    } finally {
-      setTimeout(() => {
-        
-        setLoading(false);
-      }, 8500);
-    }
-
-  const result = finalScore; // must be a number (0–5)
+const handleFinalSubmit = async () => {
+  let finalScore = 0;
+  setLoading(true);
 
   try {
-    const res = await fetch("http://localhost:5000/api/addTestScore", {
+   
+    const prompt = `
+    You are a code evaluator.
+    Here are ${answers.length} coding questions and their answers.
+    Return ONLY valid JSON like:
+    {"correctCount": X, "total": ${answers.length}}
+
+    ${questions.map(
+      (q, i) =>
+        `Q${i + 1}: ${q}\nCode:\n${answers[i] || "No answer"}\n`
+    ).join("\n")}
+        `;
+
+
+    const res = await fetch(`${API_URL}/api/TestScoreCalculator`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userid, result }),
+      body: JSON.stringify({ prompt }),
     });
 
+    console.log(res)
+   
+    if (!res.ok) {
+      if (res.status === 429) {
+        throw new Error("Too many requests. Please wait and try again.");
+      }
+      if (res.status === 503) {
+        throw new Error("AI service unavailable.");
+      }
+      throw new Error("Failed to evaluate test.");
+    }
+
     const data = await res.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Error:", error);
+
+    // if (!data.success || !data.response) {
+    //   throw new Error("Invalid response from evaluator.");
+    // }
+
+
+
+    let parsed;
+    try {
+      parsed = data.response;
+
+      if (typeof parsed === "string") {
+        const match = parsed.match(/```json\s*([\s\S]*?)\s*```/);
+        if (match) parsed = JSON.parse(match[1]);
+        else parsed = JSON.parse(parsed); // fallback
+      }
+    } catch {
+      throw new Error("Failed to parse evaluation result.");
+    }
+
+    finalScore =
+      typeof parsed.correctCount === "number"
+        ? parsed.correctCount
+        : 0;
+
+    
+    setScore(finalScore);
+    setTestSubmitted(true);
+    setIsSubmited(true);
+
+   
+
+    const saveRes = await fetch(`${API_URL}/api/addTestScore`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userid, result: finalScore }),
+    });
+
+    if (!saveRes.ok) {
+      throw new Error("Score calculated but failed to save.");
+    }
+
+  } catch (err) {
+    console.error("Final submit error:", err.message);
+    notify(err.message || "Something went wrong!", "error");
+  } finally {
+    setTimeout(() => setLoading(false), 800);
   }
-  };
+};
+
 
   // const currentQuestion = questions[currentIndex];
   const currentCode = answers[currentIndex] || "// Write your code here";
@@ -161,11 +191,11 @@ ${questions.map(
               />
             )}
           </button>
-          {currentIndex === questions.length - 1 && (
+          {(currentIndex === questions.length - 1)&&!isSubmited?(
             <button onClick={handleFinalSubmit} className="final-submit-button" >
               🚀 Submit Full Test
             </button>
-          )}
+          ):""}
         </div>
       </div>
 

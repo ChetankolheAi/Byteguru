@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { API_URL, notify } from "../../utils.js";
-import { marked } from "marked";
+import { callGemini } from "../geminiService.js";
 import "./Sorting1.css";
 
 const ShellSort = () => {
@@ -92,20 +92,12 @@ const ShellSort = () => {
       ", "
     )}]. Explain gap reduction and insertion sort behavior.`;
 
-    try {
-      const res = await fetch(`${API_URL}/api/gemini`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      setBotMessage(marked.parse(data.response || ""));
-    } catch {
-      notify("Gemini API error");
-    } finally {
-      setLoading(false);
-    }
+    callGemini({
+        prompt,
+        setLoading,
+        onSuccess: setBotMessage,
+        onError: notify,
+        });
   };
   useEffect(() => {
   window.scrollTo(0, 0);
